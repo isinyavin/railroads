@@ -9,8 +9,8 @@ import matplotlib.pyplot as plt
 import scipy as sp
 import pickle
 
-stations_gdf = gpd.read_feather('stations.feather')
-railways_gdf = gpd.read_feather('railways.feather')
+stations_gdf = gpd.read_feather('dublinrails.feather')
+railways_gdf = gpd.read_feather('dublinstation.feather')
 
 
 G = nx.Graph()

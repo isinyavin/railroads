@@ -1,0 +1,1425 @@
+{
+  "type": "FeatureCollection",
+  "generator": "overpass-turbo",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "timestamp": "2024-03-08T15:48:15Z",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/252821911",
+        "addr:city": "Adamstown",
+        "addr:county": "Dublin",
+        "addr:street": "Station Road",
+        "name": "Adamstown",
+        "name:en": "Adamstown",
+        "name:ga": "Baile Adaim",
+        "network": "Dublin Commuter",
+        "note": "ADAMF used for the fast lines.",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "ADMTN",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/travel-information/adamstown",
+        "wikidata": "Q3968830",
+        "wikipedia": "en:Adamstown railway station (Ireland)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.4692321,
+          53.3360017
+        ]
+      },
+      "id": "node/252821911"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/281197288",
+        "addr:street": "Park West Avenue",
+        "name": "Park West and Cherry Orchard",
+        "name:en": "Park West and Cherry Orchard",
+        "name:ga": "Páirc an Iarthair agus Gort na Silíní",
+        "network": "Dublin Commuter",
+        "note": "PWESF when bypassed on the fast line",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "CHORC",
+        "train": "yes",
+        "wheelchair": "yes"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.3785572,
+          53.3339771
+        ]
+      },
+      "id": "node/281197288"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/310182680",
+        "addr:city": "Clondalkin",
+        "addr:street": "Fonthill Road",
+        "name": "Clondalkin & Fonthill",
+        "name:ga": "Cluain Dolcáin agus Cnoc an Fhuaráin",
+        "network": "Dublin Commuter",
+        "note": "CLONF when bypassed on the fast line",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "CLDKN",
+        "train": "yes",
+        "wheelchair": "yes",
+        "wikidata": "Q3969438",
+        "wikipedia": "en:Clondalkin/Fonthill railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.4063997,
+          53.3333505
+        ]
+      },
+      "id": "node/310182680"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/614241268",
+        "addr:city": "Hansfield",
+        "name": "Hansfield",
+        "name:ga": "Páirc Hans",
+        "network": "Dublin Commuter",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/",
+        "wheelchair": "yes",
+        "wikidata": "Q3969773",
+        "wikipedia": "en:Hansfield railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.4420549,
+          53.3870051
+        ]
+      },
+      "id": "node/614241268"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5403835845",
+        "addr:city": "Dublin",
+        "addr:postcode": "D13T921",
+        "addr:street": "Bayside Park",
+        "name": "Bayside",
+        "name:en": "Bayside",
+        "name:ga": "Stáisiún Chois Bá",
+        "network": "DART",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "BYSDE",
+        "train": "yes",
+        "wikidata": "Q3969012",
+        "wikipedia": "en:Bayside railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.1367871,
+          53.3915385
+        ]
+      },
+      "id": "node/5403835845"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5403851242",
+        "addr:city": "Clongriffin",
+        "addr:street": "Station Hill",
+        "name": "Clongriffin",
+        "name:en": "Clongriffin",
+        "name:ga": "Cluain Ghrífín",
+        "network": "Dublin Commuter;DART",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "GRGRD",
+        "train": "yes",
+        "wheelchair": "yes",
+        "wikidata": "Q3969439",
+        "wikipedia": "en:Clongriffin railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.1489491,
+          53.4026996
+        ]
+      },
+      "id": "node/5403851242"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5403851296",
+        "addr:street": "Clontarf Road",
+        "name": "Clontarf Road",
+        "name:en": "Clontarf Road",
+        "name:ga": "Bóthar Chluain Tarbh",
+        "network": "Commuter",
+        "network:wikidata": "Q5155093",
+        "operator": "Iarnród Éireann",
+        "operator:en": "Irish Rail",
+        "operator:ga": "Iarnród Éireann",
+        "operator:wikidata": "Q73043",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "CTARF",
+        "train": "yes",
+        "wheelchair": "yes",
+        "wikidata": "Q2979578",
+        "wikipedia": "en:Clontarf Road railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.2272787,
+          53.3629491
+        ]
+      },
+      "id": "node/5403851296"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5403871877",
+        "addr:city": "Dublin",
+        "addr:street": "Sheriff Street Upper",
+        "name": "Docklands",
+        "name:en": "Docklands",
+        "name:ga": "Dugthailte",
+        "network": "Dublin Commuter",
+        "opening_hours": "Mo-Fr 07:00-10:00, 15:00-19:00",
+        "operator": "Irish Rail",
+        "phone": "+353 1 8286380",
+        "platforms": "2",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "DCKLS",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/travel-information/docklands",
+        "wheelchair": "yes",
+        "wikidata": "Q3968799",
+        "wikipedia": "en:Docklands railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.2393672,
+          53.3509039
+        ]
+      },
+      "id": "node/5403871877"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5403904825",
+        "name": "Harmonstown",
+        "name:en": "Harmonstown",
+        "name:ga": "Baile Hearman",
+        "network": "Commuter",
+        "network:wikidata": "Q5155093",
+        "operator": "Iarnród Éireann",
+        "operator:en": "Irish Rail",
+        "operator:ga": "Iarnród Éireann",
+        "operator:wikidata": "Q73043",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "HTOWN",
+        "train": "yes",
+        "wheelchair": "yes",
+        "wikidata": "Q3127545",
+        "wikipedia": "en:Harmonstown railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.1924014,
+          53.3783621
+        ]
+      },
+      "id": "node/5403904825"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5519210321",
+        "name": "Raheny",
+        "name:en": "Raheny",
+        "name:ga": "Ráth Eanaigh",
+        "network": "Commuter",
+        "network:wikidata": "Q5155093",
+        "operator": "Iarnród Éireann",
+        "operator:en": "Irish Rail",
+        "operator:ga": "Iarnród Éireann",
+        "operator:wikidata": "Q73043",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "RAHNY",
+        "train": "yes",
+        "wikidata": "Q3417567",
+        "wikipedia": "en:Raheny railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.1761274,
+          53.3816065
+        ]
+      },
+      "id": "node/5519210321"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5519213828",
+        "addr:street": "Briarfield Road",
+        "name": "Kilbarrack",
+        "name:en": "Kilbarrack",
+        "name:ga": "Cill Bharrog",
+        "network": "Commuter",
+        "network:wikidata": "Q5155093",
+        "operator": "Iarnród Éireann",
+        "operator:en": "Irish Rail",
+        "operator:ga": "Iarnród Éireann",
+        "operator:wikidata": "Q73043",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "KBRCK",
+        "train": "yes",
+        "wheelchair": "yes",
+        "wikidata": "Q2003583",
+        "wikipedia": "en:Kilbarrack railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.1614803,
+          53.3872797
+        ]
+      },
+      "id": "node/5519213828"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5519218141",
+        "addr:street": "Harbour Road",
+        "name": "Howth",
+        "name:en": "Howth",
+        "name:ga": "Binn Éadair",
+        "network": "DART",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "HOWTH",
+        "train": "yes",
+        "wheelchair": "yes",
+        "wikidata": "Q3969798",
+        "wikipedia": "en:Howth railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.0743742,
+          53.3891126
+        ]
+      },
+      "id": "node/5519218141"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5519221177",
+        "name": "Portmarnock",
+        "name:en": "Portmarnock",
+        "name:ga": "Port Mearnóg",
+        "network": "Dublin Commuter;DART",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "PMNCK",
+        "train": "yes",
+        "wikidata": "Q3970569",
+        "wikipedia": "en:Portmarnock railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.1513171,
+          53.4176576
+        ]
+      },
+      "id": "node/5519221177"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/6854406241",
+        "addr:city": "Dublin",
+        "addr:street": "Saint John's Road West",
+        "name": "Dublin Heuston",
+        "name:en": "Dublin Heuston",
+        "name:ga": "Baile Átha Cliath Heuston",
+        "network": "InterCity;Dublin Commuter",
+        "note": "There's two reference systems used: a five-letter code and a numerical identifier. I've used the former (HSTON), the latter is 1. Both can be found on the Wikipedia station list - https://en.wikipedia.org/wiki/List_of_railway_stations_in_Ireland",
+        "old_name": "Dublin Kingsbridge",
+        "operator": "Irish Rail",
+        "passenger_information_display": "yes",
+        "phone": "+353 1 7032132",
+        "platforms": "9",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "HSTON",
+        "short_name": "Heuston",
+        "start_date": "1846",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/travel-information/dublin-heuston",
+        "wheelchair": "yes",
+        "wikidata": "Q2377845",
+        "wikipedia": "en:Dublin Heuston railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.2948415,
+          53.3463091
+        ]
+      },
+      "id": "node/6854406241"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7176421917",
+        "addr:city": "Dún Laoghaire",
+        "addr:street": "Longford Terrace",
+        "name": "Salthill and Monkstown",
+        "name:en": "Salthill and Monkstown",
+        "name:ga": "Cnoc an tSalainn agus Baile na Manach",
+        "network": "DART",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "SHILL",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/en-ie/station/salthill-and-monkstown",
+        "wheelchair": "yes",
+        "wikidata": "Q3970774",
+        "wikipedia": "en:Salthill and Monkstown railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.1524235,
+          53.2953905
+        ]
+      },
+      "id": "node/7176421917"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7176421918",
+        "addr:city": "Dublin",
+        "addr:postal_district": "D04",
+        "addr:street": "Sandymount Avenue",
+        "name": "Sandymount",
+        "name:en": "Sandymount",
+        "name:ga": "Dumhach Trá",
+        "network": "DART",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "SMONT",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/en-ie/station/sandymount",
+        "wheelchair": "yes",
+        "wikidata": "Q3970859",
+        "wikipedia": "en:Sandymount railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.2210505,
+          53.327928
+        ]
+      },
+      "id": "node/7176421918"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7176421919",
+        "addr:city": "Dublin",
+        "addr:street": "Middle Third",
+        "layer": "1",
+        "name": "Killester",
+        "name:en": "Killester",
+        "name:ga": "Cill Easra",
+        "network": "Commuter",
+        "network:wikidata": "Q5155093",
+        "operator": "Iarnród Éireann",
+        "operator:en": "Irish Rail",
+        "operator:ga": "Iarnród Éireann",
+        "operator:wikidata": "Q73043",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "KLSTR",
+        "train": "yes",
+        "wheelchair": "yes",
+        "wikidata": "Q3196643",
+        "wikipedia": "en:Killester railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.2049157,
+          53.3728003
+        ]
+      },
+      "id": "node/7176421919"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7176421920",
+        "addr:city": "Dublin",
+        "addr:street": "Westland Row",
+        "alt_name": "Pearse Station",
+        "level": "1",
+        "name": "Dublin Pearse",
+        "name:en": "Dublin Pearse",
+        "name:ga": "Stáisiún na bPiarsach",
+        "network": "InterCity;Dublin Commuter;DART",
+        "old_name": "Dublin Westland Row",
+        "operator": "Irish Rail",
+        "phone": "+353 1 7033523",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "PERSE",
+        "short_name": "Pearse",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/en-ie/Station/dublin-pearse",
+        "wheelchair": "yes",
+        "wikidata": "Q2658249",
+        "wikipedia": "en:Dublin Pearse railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.2484634,
+          53.3433347
+        ]
+      },
+      "id": "node/7176421920"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7176421921",
+        "addr:city": "Dublin",
+        "addr:postal_district": "D04",
+        "addr:street": "Lansdowne Road",
+        "name": "Lansdowne Road",
+        "name:en": "Lansdowne Road",
+        "name:ga": "Bóthar Lansdún",
+        "network": "Dublin Commuter;DART",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "LDWNE",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/en-ie/station/lansdowne-road",
+        "wheelchair": "yes",
+        "wikidata": "Q2003842",
+        "wikipedia": "en:Lansdowne Road railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.2287109,
+          53.3337709
+        ]
+      },
+      "id": "node/7176421921"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7176421922",
+        "addr:city": "Dublin",
+        "addr:postal_district": "D04",
+        "addr:street": "Sydney Parade Avenue",
+        "name": "Sydney Parade",
+        "name:en": "Sydney Parade",
+        "name:ga": "Paráid Sydney",
+        "network": "DART",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "SIDNY",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/en-ie/station/sydney-parade",
+        "wheelchair": "yes",
+        "wikidata": "Q2397711",
+        "wikipedia": "en:Sydney Parade railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.2115522,
+          53.3207869
+        ]
+      },
+      "id": "node/7176421922"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7176421923",
+        "addr:city": "Booterstown",
+        "addr:street": "Rock Road",
+        "name": "Booterstown",
+        "name:en": "Booterstown",
+        "name:ga": "Baile an Bhóthair",
+        "network": "DART",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "BTSTN",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/en-ie/station/booterstown",
+        "wheelchair": "yes",
+        "wikidata": "Q3969079",
+        "wikipedia": "en:Booterstown railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.1951961,
+          53.3099853
+        ]
+      },
+      "id": "node/7176421923"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7176421924",
+        "addr:city": "Blackrock",
+        "name": "Blackrock",
+        "name:en": "Blackrock",
+        "name:ga": "An Charraig Dhubh",
+        "network": "Dublin Commuter;DART",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "BROCK",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/en-ie/station/blackrock",
+        "wheelchair": "yes",
+        "wikidata": "Q3969060",
+        "wikipedia": "en:Blackrock railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.1786985,
+          53.3028379
+        ]
+      },
+      "id": "node/7176421924"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7176421925",
+        "addr:city": "Blackrock",
+        "addr:street": "Seapoint Avenue",
+        "name": "Seapoint",
+        "name:en": "Seapoint",
+        "name:ga": "Rinn Na Mara",
+        "network": "DART",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "SEAPT",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/en-ie/station/seapoint",
+        "wheelchair": "yes",
+        "wikidata": "Q3970937",
+        "wikipedia": "en:Seapoint railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.1652076,
+          53.2991568
+        ]
+      },
+      "id": "node/7176421925"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7176421926",
+        "addr:street": "Summerhill Road",
+        "name": "Sandycove and Glasthule",
+        "name:en": "Sandycove and Glasthule",
+        "name:ga": "Cuas an Ghainimh agus Glas Tuathail",
+        "network": "DART",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "SCOVE",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/en-ie/station/sandycove-and-glasthule",
+        "wheelchair": "limited",
+        "wikidata": "Q3970858",
+        "wikipedia": "en:Sandycove and Glasthule railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.1271578,
+          53.2880018
+        ]
+      },
+      "id": "node/7176421926"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7176421928",
+        "addr:city": "Sutton",
+        "addr:street": "Station Road",
+        "name": "Sutton",
+        "name:en": "Sutton",
+        "name:ga": "Cill Fhionntain",
+        "network": "DART",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "SUTTN",
+        "train": "yes",
+        "wheelchair": "yes",
+        "wikidata": "Q3971065",
+        "wikipedia": "en:Sutton railway station (Ireland)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.1160836,
+          53.3920109
+        ]
+      },
+      "id": "node/7176421928"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7176421929",
+        "addr:city": "Malahide",
+        "addr:street": "Main Street",
+        "name": "Malahide",
+        "name:en": "Malahide",
+        "name:ga": "Mullach Íde",
+        "network": "Dublin Commuter;DART",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "MHIDE",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/travel-information/malahide",
+        "wheelchair": "yes",
+        "wikidata": "Q2459346",
+        "wikipedia": "en:Malahide railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.156591,
+          53.4506973
+        ]
+      },
+      "id": "node/7176421929"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7176421930",
+        "addr:city": "Dublin",
+        "addr:postal_district": "D13",
+        "addr:street": "Kilbarrack Way",
+        "name": "Howth Junction and Donaghmede",
+        "name:en": "Howth Junction and Donaghmede",
+        "name:ga": "Gabhal Bhinn Éadair agus Domhnach Míde",
+        "network": "Dublin Commuter;DART",
+        "old_name": "Howth Junction",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "HWTHJ----",
+        "train": "yes",
+        "wheelchair": "yes",
+        "wikidata": "Q3969804",
+        "wikipedia": "en:Howth Junction & Donaghmede railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.1558326,
+          53.3912972
+        ]
+      },
+      "id": "node/7176421930"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7184996489",
+        "addr:city": "Dún Laoghaire",
+        "addr:street": "Crofton Road",
+        "alt_name": "Dun Laoghaire",
+        "name": "Dún Laoghaire Mallin",
+        "name:ga": "Stáisiún Dhún Laoghaire Í Mhealláin",
+        "network": "InterCity;Dublin Commuter;DART",
+        "note": "Since every other station named for an Easter Rising figure had the name by default, I've swapped DL Mallin to name and DL to short_name.",
+        "old_name": "Kingstown",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "DLERY",
+        "short_name": "Dún Laoghaire",
+        "short_name:ga": "Stáisiún Dhún Laoghaire",
+        "train": "yes",
+        "uic_ref": "6000047",
+        "website": "https://www.irishrail.ie/en-ie/station/dun-laoghaire-mallin",
+        "wheelchair": "yes",
+        "wikidata": "Q3969552",
+        "wikipedia": "en:Dún Laoghaire railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.1347451,
+          53.2949953
+        ]
+      },
+      "id": "node/7184996489"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7184996490",
+        "addr:city": "Killiney",
+        "addr:street": "Station Road",
+        "name": "Killiney",
+        "name:en": "Killiney",
+        "name:ga": "Cill Iníon Léinin",
+        "network": "DART",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "KILNY",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/en-ie/station/killiney",
+        "wikidata": "Q3969866",
+        "wikipedia": "en:Killiney railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.11304,
+          53.2553845
+        ]
+      },
+      "id": "node/7184996490"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7184996491",
+        "addr:city": "Shankill",
+        "addr:postal_district": "D18",
+        "addr:street": "Shanganagh Wood",
+        "name": "Shankill",
+        "network": "DART",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "SKILL",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/en-ie/station/shankill",
+        "wheelchair": "yes",
+        "wikidata": "Q252906",
+        "wikipedia": "en:Shankill railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.1170439,
+          53.2366973
+        ]
+      },
+      "id": "node/7184996491"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7184996492",
+        "addr:city": "Glenageary",
+        "addr:street": "Station Road",
+        "name": "Glenageary",
+        "name:en": "Glenageary",
+        "name:ga": "Gleann na Caorach",
+        "network": "DART",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "GLGRY",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/en-ie/station/glenageary",
+        "wikidata": "Q3969737",
+        "wikipedia": "en:Glenageary railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.1231083,
+          53.2812377
+        ]
+      },
+      "id": "node/7184996492"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7184996494",
+        "addr:city": "Dublin",
+        "addr:housename": "Grand Canal Dock station",
+        "addr:street": "Barrow Street",
+        "alt_name": "Barrow Street",
+        "layer": "1",
+        "name": "Grand Canal Dock",
+        "name:ga": "Dug Na Canálach Móire",
+        "network": "Dublin Commuter;DART",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "GCDK",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/en-ie/station/grand-canal-dock",
+        "wheelchair": "yes",
+        "wikidata": "Q3113542",
+        "wikipedia": "en:Grand Canal Dock railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.2381879,
+          53.3398189
+        ]
+      },
+      "id": "node/7184996494"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7185160548",
+        "addr:city": "Skerries",
+        "addr:street": "Station Road",
+        "name": "Skerries",
+        "name:ga": "Na Sceirí",
+        "network": "Commuter",
+        "network:wikidata": "Q5155093",
+        "operator": "Iarnród Éireann",
+        "operator:en": "Irish Rail",
+        "operator:ga": "Iarnród Éireann",
+        "operator:wikidata": "Q73043",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "SKRES",
+        "train": "yes",
+        "wheelchair": "yes",
+        "wikidata": "Q3971011",
+        "wikipedia": "en:Skerries railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.1191749,
+          53.5739887
+        ]
+      },
+      "id": "node/7185160548"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7185160550",
+        "name": "Rush & Lusk",
+        "name:ga": "An Ros & Lusca",
+        "network": "Commuter",
+        "network:wikidata": "Q5155093",
+        "operator": "Iarnród Éireann",
+        "operator:en": "Irish Rail",
+        "operator:ga": "Iarnród Éireann",
+        "operator:wikidata": "Q73043",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "RLUSK",
+        "train": "yes",
+        "wikidata": "Q3970750",
+        "wikipedia": "en:Rush and Lusk railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.1439498,
+          53.5202128
+        ]
+      },
+      "id": "node/7185160550"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7185160557",
+        "addr:city": "Donabate",
+        "internet_access": "no",
+        "name": "Donabate",
+        "name:en": "Donabate",
+        "name:ga": "Domhnach Bat",
+        "network": "Commuter",
+        "network:wikidata": "Q5155093",
+        "operator": "Iarnród Éireann",
+        "operator:en": "Irish Rail",
+        "operator:ga": "Iarnród Éireann",
+        "operator:wikidata": "Q73043",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "DBATE",
+        "train": "yes",
+        "wikidata": "Q3969543",
+        "wikipedia": "en:Donabate railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.1513647,
+          53.4862405
+        ]
+      },
+      "id": "node/7185160557"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7185160559",
+        "addr:city": "Balbriggan",
+        "addr:street": "Railway Street",
+        "name": "Balbriggan",
+        "network": "Commuter",
+        "network:wikidata": "Q5155093",
+        "operator": "Iarnród Éireann",
+        "operator:en": "Irish Rail",
+        "operator:ga": "Iarnród Éireann",
+        "operator:wikidata": "Q73043",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "BBRGN",
+        "train": "yes",
+        "wheelchair": "yes",
+        "wikidata": "Q941586",
+        "wikipedia": "en:Balbriggan railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.1823282,
+          53.6118769
+        ]
+      },
+      "id": "node/7185160559"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7198243013",
+        "addr:city": "Dublin",
+        "addr:street": "Broombridge Road",
+        "name": "Broombridge",
+        "name:en": "Broombridge",
+        "name:ga": "Stáisiún Dhroichead Broome",
+        "network": "Dublin Commuter",
+        "operator": "Irish Rail",
+        "phone": "+353-1-8366222",
+        "phone:IE": "0818 366222",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "BBRDG",
+        "start_date": "1990",
+        "toilets": "no",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/en-ie/station/broombridge",
+        "wheelchair": "yes",
+        "wheelchair:description": "Step-free access to westbound platform from public road and Luas stop. Ramp from public road (very steep) or lift / stairs and bridge to eastbound platform.",
+        "wikidata": "Q3969133",
+        "wikipedia": "en:Broombridge railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.2988178,
+          53.3726218
+        ]
+      },
+      "id": "node/7198243013"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7198261238",
+        "addr:city": "Dublin",
+        "addr:street": "Navan Road",
+        "name": "Navan Road Parkway",
+        "name:en": "Navan Road Parkway",
+        "name:ga": "Ollpháirc Bhóthar na hUaimhe",
+        "network": "Commuter",
+        "network:wikidata": "Q5155093",
+        "old_name": "Phoenix Park",
+        "operator": "Iarnród Éireann",
+        "operator:en": "Irish Rail",
+        "operator:ga": "Iarnród Éireann",
+        "operator:wikidata": "Q73043",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "PHNPK",
+        "train": "yes",
+        "wikidata": "Q3970288",
+        "wikipedia": "en:Navan Road Parkway railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.3454293,
+          53.377553
+        ]
+      },
+      "id": "node/7198261238"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7198309240",
+        "addr:city": "Dublin",
+        "addr:postal_district": "D15",
+        "addr:street": "Callaghan Bridge",
+        "name": "Clonsilla",
+        "network": "Commuter",
+        "network:wikidata": "Q5155093",
+        "operator": "Iarnród Éireann",
+        "operator:en": "Irish Rail",
+        "operator:ga": "Iarnród Éireann",
+        "operator:wikidata": "Q73043",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "CLSLA",
+        "train": "yes",
+        "wikidata": "Q3969440",
+        "wikipedia": "en:Clonsilla railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.4231873,
+          53.3829431
+        ]
+      },
+      "id": "node/7198309240"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7198335545",
+        "addr:city": "Dublin",
+        "addr:postal_district": "D15",
+        "addr:street": "Ashtown Road",
+        "name": "Ashtown",
+        "name:ga": "Baile an Áisigh",
+        "network": "Commuter",
+        "network:wikidata": "Q5155093",
+        "operator": "Iarnród Éireann",
+        "operator:en": "Irish Rail",
+        "operator:ga": "Iarnród Éireann",
+        "operator:wikidata": "Q73043",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "ASHTN",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/travel-information/Ashtown",
+        "wikidata": "Q3968919",
+        "wikipedia": "en:Ashtown railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.3318144,
+          53.3754061
+        ]
+      },
+      "id": "node/7198335545"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7198337979",
+        "addr:city": "Castleknock",
+        "addr:street": "Castleknock Road",
+        "name": "Castleknock",
+        "name:ga": "Caisleán Cnucha",
+        "network": "Commuter",
+        "network:wikidata": "Q5155093",
+        "operator": "Iarnród Éireann",
+        "operator:en": "Irish Rail",
+        "operator:ga": "Iarnród Éireann",
+        "operator:wikidata": "Q73043",
+        "payment:leap": "yes",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "CNOCK++",
+        "train": "yes",
+        "wikidata": "Q3969330",
+        "wikipedia": "en:Castleknock railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.3714239,
+          53.3815285
+        ]
+      },
+      "id": "node/7198337979"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7198337980",
+        "addr:postcode": "D01 V6V6",
+        "addr:street": "Amiens Street",
+        "loc_name": "Connolly Station",
+        "name": "Dublin Connolly",
+        "name:en": "Dublin Connolly",
+        "name:ga": "Baile Átha Cliath Chonghaile",
+        "network": "Enterprise;InterCity;Dublin Commuter;DART",
+        "old_name": "Dublin Amiens Street",
+        "operator": "Irish Rail",
+        "phone": "+353-1-7032358",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "CNLLY",
+        "railway:ref:Translink NI Railways": "DN",
+        "ref": "100",
+        "short_name": "Connolly",
+        "start_date": "1844",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/travel-information/dublin-connolly",
+        "wheelchair": "limited",
+        "wikidata": "Q2543742",
+        "wikipedia": "en:Dublin Connolly railway station",
+        "year_built": "1844"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.2471357,
+          53.3527247
+        ]
+      },
+      "id": "node/7198337980"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/7198349811",
+        "addr:city": "Dublin",
+        "addr:postal_district": "D15",
+        "addr:street": "Carpenterstown Road",
+        "name": "Coolmine",
+        "network": "Commuter",
+        "network:wikidata": "Q5155093",
+        "operator": "Iarnród Éireann",
+        "operator:en": "Irish Rail",
+        "operator:ga": "Iarnród Éireann",
+        "operator:wikidata": "Q73043",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "CMINE",
+        "train": "yes",
+        "wheelchair": "yes",
+        "wikidata": "Q3969479",
+        "wikipedia": "en:Coolmine railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.3906473,
+          53.3776926
+        ]
+      },
+      "id": "node/7198349811"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/9123967004",
+        "addr:city": "Dublin",
+        "addr:street": "Royal Canal Avenue",
+        "internet_access": "no",
+        "name": "Pelletstown",
+        "name:en": "Pelletstown",
+        "name:ga": "Baile Pheiléid",
+        "network": "Commuter",
+        "network:wikidata": "Q5155093",
+        "opening_date": "2021",
+        "operator": "Iarnród Éireann",
+        "operator:en": "Irish Rail",
+        "operator:ga": "Iarnród Éireann",
+        "operator:wikidata": "Q73043",
+        "phone": "+353-1-8366222",
+        "phone:IE": "0818 366222",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "PELTN",
+        "start_date": "2021-09-26",
+        "toilets": "no",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/en-ie/travel-information/find-a-station?key=Pelletstown",
+        "wheelchair": "yes",
+        "wheelchair:description": "Step-free access from Royal Canal Avenue across bridge to eastbound platform. Step-free access from Ashington via ramp to westbound platform. Access via ramp only between platforms.",
+        "wikidata": "Q85792690",
+        "wikipedia": "en:Pelletstown railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.3142835,
+          53.3752046
+        ]
+      },
+      "id": "node/9123967004"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/10800545157",
+        "addr:city": "Dublin",
+        "addr:street": "Drumcondra Road Lower",
+        "area": "yes",
+        "name": "Drumcondra",
+        "name:ga": "Droim Conrach",
+        "network": "InterCity;Dublin Commuter",
+        "operator": "Irish Rail",
+        "phone": "+353-1-8305311",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "DCDRA",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/travel-information/drumcondra",
+        "wheelchair": "yes",
+        "wikidata": "Q634947",
+        "wikipedia": "en:Drumcondra railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.2587453,
+          53.363086
+        ]
+      },
+      "id": "node/10800545157"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/10803352579",
+        "addr:city": "Dublin",
+        "addr:street": "George's Quay",
+        "name": "Tara Street",
+        "name:ga": "Sráid na Teamhrach",
+        "network": "InterCity;Dublin Commuter;DART",
+        "operator": "Irish Rail",
+        "platforms": "2",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "TARA",
+        "train": "yes",
+        "wheelchair": "yes",
+        "wikidata": "Q2004945",
+        "wikipedia": "en:Tara Street railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.2543071,
+          53.3471286
+        ]
+      },
+      "id": "node/10803352579"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/10803390567",
+        "addr:city": "Dalkey",
+        "addr:street": "Railway Road",
+        "name": "Dalkey",
+        "name:en": "Dalkey",
+        "name:ga": "Deilginis",
+        "network": "DART",
+        "operator": "Irish Rail",
+        "public_transport": "station",
+        "railway": "station",
+        "railway:ref": "DLKEY",
+        "train": "yes",
+        "website": "https://www.irishrail.ie/en-ie/station/dalkey",
+        "wheelchair": "yes",
+        "wikidata": "Q3969514",
+        "wikipedia": "en:Dalkey railway station"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.1033953,
+          53.2757207
+        ]
+      },
+      "id": "node/10803390567"
+    }
+  ]
+}
