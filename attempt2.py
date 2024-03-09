@@ -2,7 +2,7 @@ import osmnx as ox
 import geopandas as gpd
 import networkx as nx
 from shapely.geometry import Point, LineString
-from shapely.ops import nearest_points
+from shapely.ops import nearest_points, split, snap
 import numpy as np
 import geopy.distance
 import matplotlib.pyplot as plt
@@ -12,7 +12,7 @@ from shapely.ops import split, nearest_points
 stations_gdf = gpd.read_feather('dublinstation.feather')
 rails_gdf = gpd.read_feather('dublinrails.feather')
 
-dublin_bounds = [-6.487438, 53.198744, -6.07804, 53.511396]  
+dublin_bounds = [-6.587438, 53.098744, -6.00804, 54.511396]  
 
 def is_within_bounds(point, bounds):
     x = point.x
@@ -34,7 +34,7 @@ for idx, railway in rails_gdf.iterrows():
         if start_node_id not in G and is_within_bounds(start_node, dublin_bounds):
             G.add_node(start_node_id, pos=(start_node.x, start_node.y), type = "rail")
         if end_node_id not in G and is_within_bounds(end_node, dublin_bounds):
-            G.add_node(end_node_id, pos=(start_node.x, start_node.y), type = "rail")
+            G.add_node(end_node_id, pos=(end_node.x, end_node.y), type = "rail")
         
         edge_attributes = {
             'id': railway['@id'],
@@ -51,13 +51,12 @@ for idx, railway in rails_gdf.iterrows():
             'wikipedia': railway.get('wikipedia', None)
         }
 
-        if is_within_bounds(start_node, dublin_bounds) and is_within_bounds(end_node, dublin_bounds):
+        if is_within_bounds(start_node, dublin_bounds) and is_within_bounds(end_node, dublin_bounds) and G.has_edge(start_node, end_node) == False:
             G.add_edge(start_node_id, end_node_id, geometry=railway.geometry, **edge_attributes)
-
-
+distances = []
 def add_station_to_graph(station, graph, railways_gdf):
     station_point = Point(station.geometry.x, station.geometry.y)
-    print(station["name"])
+    #print(station["name"])
     
     edge_distances = []
 
@@ -70,14 +69,23 @@ def add_station_to_graph(station, graph, railways_gdf):
 
     edge_distances.sort(key=lambda x: x[0])
     nearest_edges = edge_distances[:2]
+    station_node_id = f"{station_point.x}_{station_point.y}"
+    station_attributes = {
+        'name': station['name'],
+    }
+    graph.add_node(station_node_id, pos=(station_point.x, station_point.y), type = "station", **station_attributes)
 
     for dist, (u, v), nearest_point, edge_geom in nearest_edges:
-        station_node_id = len(graph) + 1
-        connector_id = len(graph) +2
-        station_attributes = {
-            'name': station['name'],
-        }
-        graph.add_node(station_node_id, pos=(station_point.x, station_point.y), type = "station", **station_attributes)
+        if graph.has_edge(u, v) == False or graph.has_edge(v,u) == False:
+            print("ALERTALERTALERTALERTALERTALERTALERTALERTALERTALERTALERTALERTALERTALERTALERTALERTALERT")
+            continue
+        connector_id = f"{nearest_point.x}_{nearest_point.y}"
+        if connector_id == station_node_id:
+            continue
+
+        distances.append(dist)
+        if dist > 0.001:
+            continue
         graph.add_node(connector_id, pos=(nearest_point.x, nearest_point.y))
 
         u_pos = graph.nodes[u]['pos']
@@ -87,33 +95,89 @@ def add_station_to_graph(station, graph, railways_gdf):
         print(edge_geom)
         print(nearest_point)
 
+
+
+
         line = edge_geom
         point =  nearest_point
 
-        nearest_point_on_line, nearest_point = nearest_points(line, point)
+        """
+        snapped_point = snap(point, line, tolerance=0.00001)
 
+        # Create a list of the original coordinates plus the new point
+        coords = list(line.coords)
+        inserted_index = None
+        for i, coord in enumerate(coords[:-1]):
+            if LineString(coords[i:i+2]).distance(snapped_point) < 0.00001:
+                inserted_index = i + 1
+                break
+
+  
+        if inserted_index is not None:
+            coords.insert(inserted_index, (snapped_point.x, snapped_point.y))
+
+      
+            line_to_nearest = LineString(coords[:inserted_index + 1])
+            nearest_to_end = LineString(coords[inserted_index:])
+
+       
+            print("######NEW#####")
+            print(edge_geom)
+            print(line_to_nearest)
+            print(nearest_to_end)
+            
+        else:
+            print("Could not determine position to insert point in LineString.")
+            exit(1)
+
+        """
+        nearest_point_on_line, nearest_point2 = nearest_points(line, point)
 
         closest_coordinate = min(line.coords, key=lambda coord: Point(coord).distance(nearest_point_on_line))
+        closest_point_geometry = Point(closest_coordinate)
 
         print("The closest coordinate on the LineString to the Point is:", closest_coordinate)
 
-        split_geom = split(edge_geom.coords, Point(nearest_point.x, nearest_point.y))
-        geom_to_u = split_geom.geoms[0]
-        geom_to_v = split_geom.geoms[1]
+        split_geom = split(line, closest_point_geometry)
+        #print(line)
+        print(closest_point_geometry)
 
-        graph.add_edge(connector_id, station_node_id, weight=dist, geometry=edge_to_u_geometry)
+        i = 0 
+        if len(split_geom.geoms) == 2:
+            geom_to_u = split_geom.geoms[0]
+            geom_to_v = split_geom.geoms[1]
+            print("Split successful")
+            x,y = nearest_point.x, nearest_point.y
+            geom_to_u = LineString(list(geom_to_u.coords) + [(x,y)])
+            geom_to_v = LineString([(x,y)]+ list(geom_to_v.coords)[1:])
+            print(geom_to_u)
+            print(geom_to_v)
+        else:
+            i+=1
+            u_pos = graph.nodes[u]['pos']
+            v_pos = graph.nodes[v]['pos']
+            geom_to_u = LineString([u_pos, nearest_point])
+            geom_to_v = LineString([nearest_point, v_pos])
+        print(i)
+        #geom_to_u = LineString([u_pos, nearest_point])
+        #geom_to_v = LineString([nearest_point, v_pos])
+        print(geom_to_u)
+        print(geom_to_v)
+        
+        graph.add_edge(connector_id, station_node_id, geometry=edge_to_u_geometry)
         graph.add_edge(u, connector_id, geometry = geom_to_u)
-        graph.add_edge(v, connector_id, geometry = geom_to_v)
-        #graph.remove_edge(u,v)
+        graph.add_edge(connector_id, v, geometry = geom_to_v)
+
+        graph.remove_edge(u,v)
 
 i =0 
 for idx, station in stations_gdf.iterrows():
     i += 1 
-    print(f"Station: {station['name']} Count: {i/49*100}")
+    #print(f"Station: {station['name']} Count: {i/49*100}")
     add_station_to_graph(station, G, rails_gdf)
 
 pos = nx.get_node_attributes(G, 'pos')
-print(list(pos.items())[:5])
+#print(list(pos.items())[:5])
 
 
 def plot_graph(G):
@@ -144,6 +208,19 @@ def plot_graph(G):
 
 #plot_graph(G)
     
+
+def calculate_distance(coords):
+    """Calculate the distance of a LineString using its coordinates."""
+    if len(coords) > 1:
+        return sum(geopy.distance.geodesic(coords[i], coords[i+1]).meters for i in range(len(coords) - 1))
+    else:
+        return 0
+
+for u, v, data in G.edges(data=True):
+    if 'geometry' in data:
+        edge_length = calculate_distance(list(data['geometry'].coords))
+        G[u][v]['weight'] = edge_length
+
 def find_and_plot_path(G, station_name_start, station_name_end):
     station_nodes = {data['name']: node for node, data in G.nodes(data=True) if data.get('type') == 'station'}
     start_node = station_nodes.get(station_name_start)
@@ -154,7 +231,8 @@ def find_and_plot_path(G, station_name_start, station_name_end):
         return
     
 
-    shortest_path = nx.shortest_path(G, source=start_node, target=end_node)
+    shortest_path = nx.shortest_path(G, source=start_node, target=end_node, weight='weight')
+    edge_list = list(zip(shortest_path[:-1], shortest_path[1:]))
     
     plt.figure(figsize=(10, 10))
     
@@ -170,21 +248,37 @@ def find_and_plot_path(G, station_name_start, station_name_end):
         else:
             print("alert")
     
-    print(shortest_path)
+    coords = []
+    #nx.draw_networkx_edges(G, pos, edgelist=edge_list, edge_color='green', width=5)
+
+
     for i in range(len(shortest_path)-1):
         u = shortest_path[i]
         v = shortest_path[i+1]
-    
+
+        #if 'geometry' in G[u][v]:  # Ensure geometry exists for this edge
         xs, ys = G[u][v]['geometry'].xy
+        print(xs)
+        print(ys)
+        coords.extend(list(zip(xs, ys)))  # Store coordinates for any further use
         plt.plot(xs, ys, color='green', linewidth=5, alpha=0.8)
-        
 
- 
-
+    output_file_path = 'coords.txt'
+    # Open the file for writing
+    with open(output_file_path, 'w') as file:
+        for coord in coords:
+        # Write each coordinate to the file, formatted as x, y
+            file.write(f"{coord[0]}, {coord[1]}\n")
 
 
     plt.axis('equal')
     plt.axis('off')
     plt.show()
 
-find_and_plot_path(G, 'Clondalkin & Fonthill', 'Hansfield')
+
+with open("distances.txt", 'w') as file:
+    for distance in distances:
+        file.write(str(distance))
+        file.write("\n")
+find_and_plot_path(G, 'Adamstown', 'Shankill')
+
