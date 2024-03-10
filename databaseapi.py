@@ -6,6 +6,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///my_stations_database.db'
 db = SQLAlchemy(app)
 
 class Station(db.Model):
+    __tablename__ = 'stations'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     latitude = db.Column(db.Float)
@@ -25,4 +26,6 @@ def get_stations():
     return jsonify([station.to_dict() for station in stations])
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    with app.app_context():
+        db.create_all()
+    app.run(debug=True, port=5011)
