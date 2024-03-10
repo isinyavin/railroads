@@ -10,15 +10,26 @@
   z-index: 1000;
 }
 
+.find-route-button {
+  font-size: 1rem; /* Adjust the font size as needed */
+  padding: 10px 20px; /* Adjust padding to make button smaller or bigger */
+  margin-top: 20px; /* Adds some space above the button */
+  background-color: #4CAF50; /* Background color of the button */
+  color: white; /* Text color */
+  border: none; /* Removes border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Changes cursor to a hand symbol on hover */
+  align-self: start; /* Aligns button to the start of the flex container */
+}
+
 .Content {
   display: flex;
   margin-top: 90px; /* Adjust based on the height of your header */
 }
 
 .Selectors {
-  flex: 1;
-  padding-right: 20px;
-  /* Rest of your styles */
+  flex-direction: column;
+  /* ... other styles ... */
 }
 
 .MapContainer {

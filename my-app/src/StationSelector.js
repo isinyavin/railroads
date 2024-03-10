@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-function StationSelector({ label }) {
+function StationSelector({ label, onSelect, selectedStation }) {
   const [stations, setStations] = useState([]);
 
   useEffect(() => {
     const fetchStations = async () => {
-      const response = await fetch('/api/stations');
+      const response = await fetch('http://127.0.0.1:5002/api/stations');
       const data = await response.json();
       setStations(data);
     };
@@ -13,12 +13,16 @@ function StationSelector({ label }) {
     fetchStations();
   }, []);
 
+  const handleSelectChange = (event) => {
+    onSelect(event.target.value); 
+  };
+
   return (
     <div className="station-selector">
       <label>{label}</label>
-      <select>
-        {stations.map((station, index) => (
-          <option key={index} value={station.name}>
+      <select value={selectedStation} onChange={handleSelectChange}>
+        {stations.map((station) => (
+          <option key={station.id} value={station.name}>
             {station.name}
           </option>
         ))}
@@ -28,4 +32,3 @@ function StationSelector({ label }) {
 }
 
 export default StationSelector;
-
