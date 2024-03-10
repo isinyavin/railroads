@@ -320,7 +320,12 @@ with open("distances.txt", 'w') as file:
         file.write("\n")
 
 fig, ax = plt.subplots(figsize=(10, 10))
-find_and_plot_path(G, 'Adamstown', 'Shankill',ax)
+find_and_plot_path(G, 'Balbriggan', 'Sandycove and Glasthule',ax)
+
+
+
+
+
 
 def find_shortest_path(G, station_name_start, station_name_end):
     station_nodes = {data['name']: node for node, data in G.nodes(data=True) if data.get('type') == 'station'}
@@ -335,4 +340,4 @@ def find_shortest_path(G, station_name_start, station_name_end):
     gdf_path = gpd.GeoDataFrame(geometry=line_geom, crs='epsg:4326')
     return {"path": gdf_path}
 
-print(find_shortest_path(G, 'Adamstown', 'Howth'))
+#print(find_shortest_path(G, 'Adamstown', 'Howth'))
