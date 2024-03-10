@@ -9,13 +9,19 @@ function App() {
       <header className="App-header">
         RailRouter
       </header>
-      <div className="Selectors">
-        <StationSelector label="Departing Station" />
-        <StationSelector label="Arriving Station" />
+      <div className="Content">
+        <div className="Selectors">
+          {/* Your selectors here */}
+          <StationSelector label="Start Station" />
+          <StationSelector label="Destination Station" />
+        </div>
+        <div className="MapContainer">
+          <Map />
+        </div>
       </div>
-      <Map />
     </div>
   );
 }
+
 
 export default App;
