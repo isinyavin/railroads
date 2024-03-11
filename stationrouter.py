@@ -10,7 +10,7 @@ from shapely.geometry import Point, LineString
 import contextily as ctx
 
 def find_route(station_name_start, station_name_end):
-    fig, ax = plt.subplots(figsize=(10, 10))
+    fig, ax = plt.subplots(figsize=(15, 15))
     with open('dublingraph.pkl', 'rb') as file:
         G = pickle.load(file)
     station_nodes = {data['name']: node for node, data in G.nodes(data=True) if data.get('type') == 'station'}
@@ -27,6 +27,15 @@ def find_route(station_name_start, station_name_end):
     gdf_path = gpd.GeoDataFrame(geometry=line_geom, crs='epsg:4326')
 
     path_union = gdf_path.unary_union
+
+    all_points = [Point(data['pos']) for node, data in G.nodes(data=True)]
+    all_geoms = [data['geometry'] for u, v, data in G.edges(data=True) if 'geometry' in data] + all_points
+    all_union = gpd.GeoSeries(all_geoms).unary_union
+    minx, miny, maxx, maxy = path_union.bounds
+
+    margin = 0.05  
+    plt.xlim(minx - margin, maxx + margin)
+    plt.ylim(miny - margin, maxy + margin)
     
     stations_within_distance = []
     for node, data in G.nodes(data=True):
@@ -41,6 +50,7 @@ def find_route(station_name_start, station_name_end):
         gdf_stations = gpd.GeoDataFrame(geometry=stations_within_distance, crs='epsg:4326')
         gdf_stations.plot(ax=ax, color='red', markersize=50, zorder=3, alpha=0.8)
 
-    ctx.add_basemap(ax, crs=gdf_path.crs.to_string(), source=ctx.providers.OpenStreetMap.Mapnik)
+    ctx.add_basemap(ax, crs=gdf_path.crs.to_string(), source=ctx.providers.Esri.WorldStreetMap)
+    plt.axis('off')
 
     return plt

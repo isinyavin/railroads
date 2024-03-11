@@ -1,13 +1,15 @@
 // In App.js
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import StationSelector from './StationSelector';
 import Map from './Map';
 import './App.css';
+import SearchBar from "./SearchBar"
 
 function App() {
   const [startStation, setStartStation] = useState('');
   const [destinationStation, setDestinationStation] = useState('');
   const [routeImage, setRouteImage] = useState(null); 
+
 
   const handleFindRoute = async () => {
     try {
@@ -15,7 +17,7 @@ function App() {
       if (response.ok) {
         const blob = await response.blob();
         const imageUrl = URL.createObjectURL(blob);
-        setRouteImage(imageUrl); // Update state with the route image URL
+        setRouteImage(imageUrl);
       } else {
         alert('Failed to find the route. Please try again.');
       }
@@ -31,14 +33,16 @@ function App() {
         RailRouter
       </header>
       <div className="Content">
-        <div className="Selectors">
-          <StationSelector label="Start Station" onSelect={setStartStation} selectedStation={startStation} />
-          <StationSelector label="Destination Station" onSelect={setDestinationStation} selectedStation={destinationStation} />
+        {/* Wrap the selectors and the button in an additional div */}
+        <div className="Selectors-wrapper">
+          <div className="Selectors">
+            <SearchBar placeholder="Enter Departure Station" onSelect={setStartStation} selectedStation={startStation}/>
+            <SearchBar placeholder="Enter Destination Station" onSelect={setDestinationStation} selectedStation={destinationStation} />
+          </div>
+          <button className="find-route-button" onClick={handleFindRoute}>Find Route</button>
         </div>
-        <button className="find-route-button" onClick={handleFindRoute}>Find Route</button>
         <div className="MapContainer">
-          {/* Now routeImage is defined and passed correctly */}
-          <Map routeImage={routeImage} /> 
+          <Map routeImage={routeImage} />
         </div>
       </div>
     </div>
