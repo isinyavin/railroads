@@ -6,3 +6,4 @@ matplotlib
 networkx
 shapely
 contextily
+gunicorn==20.1.0
