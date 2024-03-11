@@ -7,4 +7,4 @@ networkx
 shapely
 contextily
 gunicorn==20.1.0
-pyarrow.feather
+pyarrow
