@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/railroads/static/css/main.1b8dfcfb.css",
-    "main.js": "/railroads/static/js/main.f5fb10c6.js",
+    "main.js": "/railroads/static/js/main.343b7235.js",
     "index.html": "/railroads/index.html",
     "main.1b8dfcfb.css.map": "/railroads/static/css/main.1b8dfcfb.css.map",
-    "main.f5fb10c6.js.map": "/railroads/static/js/main.f5fb10c6.js.map"
+    "main.343b7235.js.map": "/railroads/static/js/main.343b7235.js.map"
   },
   "entrypoints": [
     "static/css/main.1b8dfcfb.css",
-    "static/js/main.f5fb10c6.js"
+    "static/js/main.343b7235.js"
   ]
 }
