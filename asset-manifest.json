@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/railroads/static/css/main.1b8dfcfb.css",
+    "main.js": "/railroads/static/js/main.844dd362.js",
+    "index.html": "/railroads/index.html",
+    "main.1b8dfcfb.css.map": "/railroads/static/css/main.1b8dfcfb.css.map",
+    "main.844dd362.js.map": "/railroads/static/js/main.844dd362.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1b8dfcfb.css",
+    "static/js/main.844dd362.js"
+  ]
+}
