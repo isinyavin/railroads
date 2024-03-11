@@ -13,7 +13,7 @@ function App() {
 
   const handleFindRoute = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:5002/api/route/${startStation}/${destinationStation}`);
+      const response = await fetch(`https://railroads.onrender.com/api/route/${startStation}/${destinationStation}`);
       if (response.ok) {
         const blob = await response.blob();
         const imageUrl = URL.createObjectURL(blob);
