@@ -1,0 +1,9 @@
+Flask
+Flask-SQLAlchemy
+Flask-CORS
+geopandas
+matplotlib
+networkx
+shapely
+contextily
+pickle
