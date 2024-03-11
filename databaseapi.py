@@ -53,6 +53,11 @@ def setup_database():
         db.session.add(station)
     db.session.commit()
 
+with app.app_context():
+    db.create_all()
+    setup_database()
+
+
 @app.route('/api/route/<string:depart>/<string:arrive>', methods=["GET"])
 def get_route(depart, arrive):
     img = generate_graph_image(depart, arrive)
