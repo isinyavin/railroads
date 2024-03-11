@@ -17,7 +17,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 CORS(app)
-CORS(app, origins=["http://localhost:3001"])
+CORS(app, origins=["https://isinyavin.github.io/railways"])
 
 class Station(db.Model):
     __tablename__ = 'stations'
