@@ -35,7 +35,7 @@ function SearchBar({placeholder, onSelect, selectedStation}){
         const fetchStations = async () => {
           setIsLoading(true);
           try {
-            const response = await fetch('http://127.0.0.1:5002/api/stations');
+            const response = await fetch('https://railroads.onrender.com/api/stations');
             if (!response.ok) {
               throw new Error('Something went wrong!');
             }
