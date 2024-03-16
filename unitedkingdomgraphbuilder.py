@@ -11,7 +11,7 @@ from shapely.ops import split, nearest_points
 import pickle
 import sqlite3
 
-conn = sqlite3.connect('ukgraph2.db')
+conn = sqlite3.connect('ukgraph2.db')#yes
 c = conn.cursor()
 
 c.execute('''CREATE TABLE IF NOT EXISTS nodes
