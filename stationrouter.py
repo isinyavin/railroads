@@ -8,14 +8,55 @@ from io import BytesIO
 import pickle
 from shapely.geometry import Point, LineString
 import contextily as ctx
+import sqlite3
+from shapely.wkt import loads
+import numpy as np
 
-def find_route(station_name_start, station_name_end):
-    fig, ax = plt.subplots(figsize=(15, 15))
-    with open('dublingraph.pkl', 'rb') as file:
-        G = pickle.load(file)
+def find_bounds_stations(stations):
+    if not stations:
+        return None  
+
+    all_x = [station.x for station in stations]
+    all_y = [station.y for station in stations]
+
+    all_x_array = np.array(all_x)
+    all_y_array = np.array(all_y)
+
+    minx = np.min(all_x_array)
+    miny = np.min(all_y_array)
+    maxx = np.max(all_x_array)
+    maxy = np.max(all_y_array)
+
+    return minx, miny, maxx, maxy
+
+def load_graph_from_db(db_path):
+    G = nx.Graph()
+    conn = sqlite3.connect(db_path)
+    c = conn.cursor()
+
+    c.execute('SELECT node_id, x, y, type, name FROM nodes')
+    for row in c.fetchall():
+        node_id, x, y, type_, name = row
+        G.add_node(node_id, pos=(x, y), type=type_, name=name)
+
+    c.execute('SELECT start_node_id, end_node_id, geometry FROM edges')
+    for row in c.fetchall():
+        start_node_id, end_node_id, geometry = row
+        if geometry:
+            line = loads(geometry)
+            G.add_edge(start_node_id, end_node_id, geometry = line)
+
+    conn.close()
+    return G
+
+
+def find_route(station_name_start, station_name_end, db_path):
+    fig, ax = plt.subplots(figsize=(10, 10))
+    G = load_graph_from_db(db_path)
     station_nodes = {data['name']: node for node, data in G.nodes(data=True) if data.get('type') == 'station'}
     start_node = station_nodes.get(station_name_start)
     end_node = station_nodes.get(station_name_end)
+    #plot_graph(G)
     
     if not start_node or not end_node:
         print("One or both of the stations could not be found.")
@@ -28,15 +69,6 @@ def find_route(station_name_start, station_name_end):
 
     path_union = gdf_path.unary_union
 
-    all_points = [Point(data['pos']) for node, data in G.nodes(data=True)]
-    all_geoms = [data['geometry'] for u, v, data in G.edges(data=True) if 'geometry' in data] + all_points
-    all_union = gpd.GeoSeries(all_geoms).unary_union
-    minx, miny, maxx, maxy = path_union.bounds
-
-    margin = 0.05  
-    plt.xlim(minx - margin, maxx + margin)
-    plt.ylim(miny - margin, maxy + margin)
-    
     stations_within_distance = []
     for node, data in G.nodes(data=True):
         if data.get('type') == 'station':
@@ -44,11 +76,36 @@ def find_route(station_name_start, station_name_end):
             if path_union.distance(station_point) <= 0.005:
                 stations_within_distance.append(station_point)
 
+    bounds = find_bounds_stations(stations_within_distance)
+    if bounds:
+        minx, miny, maxx, maxy = bounds
+        margin = 1 
+        plt.xlim(minx - margin, maxx + margin)
+        plt.ylim(miny - margin, maxy + margin)
+
     gdf_path.plot(ax=ax, color='green', linewidth=3, zorder=2)
     
     if stations_within_distance:
         gdf_stations = gpd.GeoDataFrame(geometry=stations_within_distance, crs='epsg:4326')
-        gdf_stations.plot(ax=ax, color='red', markersize=50, zorder=3, alpha=0.8)
+        gdf_stations.plot(ax=ax, color='red', markersize=20, zorder=3, alpha=0.8)
+        start_node_geom = Point(G.nodes[start_node]['pos'])  
+        gdf_start_node = gpd.GeoDataFrame(geometry=[start_node_geom], crs='epsg:4326')
+
+        gdf_start_node.plot(ax=ax, color='blue', markersize=100, zorder=3, alpha=0.8)
+        end_node_geom = Point(G.nodes[end_node]['pos'])  
+        gdf_end_node = gpd.GeoDataFrame(geometry=[end_node_geom], crs='epsg:4326')
+
+        gdf_end_node.plot(ax=ax, color='blue', markersize=100, zorder=3, alpha=0.8)
+        y_offset = 0.1  
+        background_padding = dict(boxstyle="round,pad=0.5", facecolor="white", edgecolor="none", alpha=0.6)  
+
+        ax.text(start_node_geom.x, start_node_geom.y + y_offset, station_name_start, 
+                horizontalalignment='center', verticalalignment='center', 
+                color='black', fontsize=12, weight='bold', bbox=background_padding)
+
+        ax.text(end_node_geom.x, end_node_geom.y + y_offset, station_name_end, 
+                horizontalalignment='center', verticalalignment='center', 
+                color='black', fontsize=12, weight='bold', bbox=background_padding)
 
     ctx.add_basemap(ax, crs=gdf_path.crs.to_string(), source=ctx.providers.Esri.WorldStreetMap)
     plt.axis('off')

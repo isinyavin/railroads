@@ -17,7 +17,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 CORS(app)
-CORS(app, origins=["https://isinyavin.github.io/railways"])
+CORS(app, origins=["http://localhost:3000"])
 
 class Station(db.Model):
     __tablename__ = 'stations'
@@ -58,7 +58,7 @@ with app.app_context():
     setup_database()
 
 
-@app.route('/api/route/<string:depart>/<string:arrive>', methods=["GET"])
+@app.route('/api/route/<string:geography>/<string:depart>/<string:arrive>', methods=["GET"])
 def get_route(depart, arrive):
     img = generate_graph_image(depart, arrive)
     return send_file(img, mimetype='image/png')
@@ -79,4 +79,4 @@ def get_stations():
 if __name__ == '__main__':
     with app.app_context():
         setup_database()
-    app.run(debug=True, port = 5002)
+    app.run(debug=True, port = 5003)

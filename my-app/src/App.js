@@ -1,19 +1,20 @@
-// In App.js
+"use client"
 import React, { useState} from 'react';
-import StationSelector from './StationSelector';
+import GeographySelector from "./GeographySelector"
 import Map from './Map';
 import './App.css';
 import SearchBar from "./SearchBar"
 
 function App() {
   const [startStation, setStartStation] = useState('');
+  const [geography, setGeography] = useState =('')
   const [destinationStation, setDestinationStation] = useState('');
   const [routeImage, setRouteImage] = useState(null); 
 
 
   const handleFindRoute = async () => {
     try {
-      const response = await fetch(`https://railroads.onrender.com/api/route/${startStation}/${destinationStation}`);
+      const response = await fetch(`http://127.0.0.1:5003/route/${geography}/${startStation}/${destinationStation}`);
       if (response.ok) {
         const blob = await response.blob();
         const imageUrl = URL.createObjectURL(blob);
@@ -36,6 +37,7 @@ function App() {
         {/* Wrap the selectors and the button in an additional div */}
         <div className="Selectors-wrapper">
           <div className="Selectors">
+            <GeographySelector label="Choose a geography" onSelect={setGeography} selectedGeography={geography}/>
             <SearchBar placeholder="Enter Departure Station" onSelect={setStartStation} selectedStation={startStation}/>
             <SearchBar placeholder="Enter Destination Station" onSelect={setDestinationStation} selectedStation={destinationStation} />
           </div>
