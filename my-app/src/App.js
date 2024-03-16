@@ -7,14 +7,14 @@ import SearchBar from "./SearchBar"
 
 function App() {
   const [startStation, setStartStation] = useState('');
-  const [geography, setGeography] = useState =('')
+  const [geography, setGeography] = useState('');
   const [destinationStation, setDestinationStation] = useState('');
   const [routeImage, setRouteImage] = useState(null); 
 
 
   const handleFindRoute = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:5003/route/${geography}/${startStation}/${destinationStation}`);
+      const response = await fetch(`http://127.0.0.1:5004/api/route/${geography}/${startStation}/${destinationStation}`);
       if (response.ok) {
         const blob = await response.blob();
         const imageUrl = URL.createObjectURL(blob);
@@ -37,9 +37,13 @@ function App() {
         {/* Wrap the selectors and the button in an additional div */}
         <div className="Selectors-wrapper">
           <div className="Selectors">
-            <GeographySelector label="Choose a geography" onSelect={setGeography} selectedGeography={geography}/>
-            <SearchBar placeholder="Enter Departure Station" onSelect={setStartStation} selectedStation={startStation}/>
-            <SearchBar placeholder="Enter Destination Station" onSelect={setDestinationStation} selectedStation={destinationStation} />
+            <GeographySelector
+              label="Choose a geography"
+              setSelectedGeography={setGeography}
+              selectedGeography={geography}
+            />
+            <SearchBar geography={geography} placeholder="Enter Departure Station" onSelect={setStartStation} selectedStation={startStation}/>
+            <SearchBar geography={geography} placeholder="Enter Destination Station" onSelect={setDestinationStation} selectedStation={destinationStation} />
           </div>
           <button className="find-route-button" onClick={handleFindRoute}>Find Route</button>
         </div>

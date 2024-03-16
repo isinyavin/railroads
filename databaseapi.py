@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request, send_file
+from sqlalchemy import create_engine, text
 from flask_sqlalchemy import SQLAlchemy
 import geopandas as gpd
 from flask_cors import CORS
@@ -13,7 +14,7 @@ import contextily as ctx
 from stationrouter import find_route
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dublingraph.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 CORS(app)
@@ -21,7 +22,7 @@ CORS(app, origins=["http://localhost:3000"])
 
 class Station(db.Model):
     __tablename__ = 'stations'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
@@ -34,33 +35,37 @@ class Station(db.Model):
             'longitude': self.longitude
         }
 
-def generate_graph_image(station_name_start, station_name_end):
-    plt = find_route(station_name_start, station_name_end)
-    
+def generate_graph_image(station_name_start, station_name_end, db_path, margin):
+    plt = find_route(station_name_start, station_name_end, db_path, margin)
     img = BytesIO()
     plt.savefig(img, format='png', bbox_inches='tight')
     img.seek(0) 
     plt.close('all') 
     return img
 
-def setup_database():
-    db.create_all()
-    stations_gdf = gpd.read_feather('feather_files/dublinstation.feather')
-    for index, row in stations_gdf.iterrows():
-        point = row['geometry']
-        lat, lon = point.y, point.x
-        station = Station(name=row['name'], latitude=lat, longitude=lon)
-        db.session.add(station)
-    db.session.commit()
 
 with app.app_context():
     db.create_all()
-    setup_database()
+
+def get_stations_from_db(db_path):
+    engine = create_engine(db_path)
+    print(db_path)
+    with engine.connect() as connection:
+        query = text("SELECT name FROM nodes WHERE type = 'station' AND name IS NOT NULL")
+        result = connection.execute(query)
+        stations = [row._asdict() for row in result]
+    return stations
 
 
 @app.route('/api/route/<string:geography>/<string:depart>/<string:arrive>', methods=["GET"])
-def get_route(depart, arrive):
-    img = generate_graph_image(depart, arrive)
+def get_route(depart, arrive, geography):
+    if geography == "dublin":
+        db_path = "dublingraph.db"
+        margin = 0.05
+    if geography == "uk":
+        db_path = "ukgraph2.db"
+        margin = 1
+    img = generate_graph_image(depart, arrive, db_path, margin)
     return send_file(img, mimetype='image/png')
 
 @app.route('/api/stations/<string:name>', methods=['GET'])
@@ -71,12 +76,19 @@ def get_station_by_name(name):
     else:
         return jsonify({"error": "Station not found"}), 404
 
-@app.route('/api/stations', methods=['GET'])
-def get_stations():
-    stations = Station.query.all()
-    return jsonify([station.to_dict() for station in stations])
+@app.route('/api/<string:geography>/stations', methods=['GET'])
+def get_stations(geography):
+    GEOGRAPHY_DATABASE_MAP = {
+        'dublin': 'sqlite:///dublingraph.db',
+        'uk': 'sqlite:///ukgraph2.db'
+    }
+
+    db_path = GEOGRAPHY_DATABASE_MAP.get(geography.lower())
+    if db_path is None:
+        return jsonify({"error": f"No database found for geography: {geography}"}), 404
+
+    stations = get_stations_from_db(db_path)
+    return jsonify(stations)
 
 if __name__ == '__main__':
-    with app.app_context():
-        setup_database()
-    app.run(debug=True, port = 5003)
+    app.run(debug=True, port = 5004)

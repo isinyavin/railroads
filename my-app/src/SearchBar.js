@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "./searchBar.css"
 
-function SearchBar({placeholder, onSelect, selectedStation}){
+function SearchBar({geography, placeholder, onSelect, selectedStation}){
     const [stations, setStations] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -32,23 +32,26 @@ function SearchBar({placeholder, onSelect, selectedStation}){
     }
 
     useEffect(() => {
-        const fetchStations = async () => {
-          setIsLoading(true);
-          try {
-            const response = await fetch('http://127.0.0.1:5003/api/stations');
-            if (!response.ok) {
-              throw new Error('Something went wrong!');
-            }
-            const data = await response.json();
-            setStations(data);
-          } catch (error) {
-            setError(error.message);
+      const fetchStations = async () => {
+        setIsLoading(true);
+        try {
+          // Use the `geography` prop in the API URL
+          const response = await fetch(`http://127.0.0.1:5004/api/${geography}/stations`);
+          if (!response.ok) {
+            throw new Error('Something went wrong!');
           }
-          setIsLoading(false);
-        };
-    
+          const data = await response.json();
+          setStations(data);
+        } catch (error) {
+          setError(error.message);
+        }
+        setIsLoading(false);
+      };
+
+      if (geography) {
         fetchStations();
-      }, []);
+      }
+    }, [geography]);
 
     return (
         <div className="search">

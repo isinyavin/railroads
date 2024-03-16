@@ -50,7 +50,7 @@ def load_graph_from_db(db_path):
     return G
 
 
-def find_route(station_name_start, station_name_end, db_path):
+def find_route(station_name_start, station_name_end, db_path, margin):
     fig, ax = plt.subplots(figsize=(10, 10))
     G = load_graph_from_db(db_path)
     station_nodes = {data['name']: node for node, data in G.nodes(data=True) if data.get('type') == 'station'}
@@ -79,7 +79,6 @@ def find_route(station_name_start, station_name_end, db_path):
     bounds = find_bounds_stations(stations_within_distance)
     if bounds:
         minx, miny, maxx, maxy = bounds
-        margin = 1 
         plt.xlim(minx - margin, maxx + margin)
         plt.ylim(miny - margin, maxy + margin)
 
@@ -96,16 +95,16 @@ def find_route(station_name_start, station_name_end, db_path):
         gdf_end_node = gpd.GeoDataFrame(geometry=[end_node_geom], crs='epsg:4326')
 
         gdf_end_node.plot(ax=ax, color='blue', markersize=100, zorder=3, alpha=0.8)
-        y_offset = 0.1  
+        y_offset = margin/10 
         background_padding = dict(boxstyle="round,pad=0.5", facecolor="white", edgecolor="none", alpha=0.6)  
 
         ax.text(start_node_geom.x, start_node_geom.y + y_offset, station_name_start, 
                 horizontalalignment='center', verticalalignment='center', 
-                color='black', fontsize=12, weight='bold', bbox=background_padding)
+                color='black', fontsize=8, weight='bold', bbox=background_padding)
 
         ax.text(end_node_geom.x, end_node_geom.y + y_offset, station_name_end, 
                 horizontalalignment='center', verticalalignment='center', 
-                color='black', fontsize=12, weight='bold', bbox=background_padding)
+                color='black', fontsize=8, weight='bold', bbox=background_padding)
 
     ctx.add_basemap(ax, crs=gdf_path.crs.to_string(), source=ctx.providers.Esri.WorldStreetMap)
     plt.axis('off')
