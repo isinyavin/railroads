@@ -11,7 +11,7 @@ from io import BytesIO
 import pickle
 from shapely.geometry import Point, LineString
 import contextily as ctx
-from stationrouter import find_route
+from stationrouter import find_route, get_stations_route
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dublingraph.db'
@@ -63,10 +63,20 @@ def get_route(depart, arrive, geography):
         db_path = "dublingraph.db"
         margin = 0.05
     if geography == "uk":
-        db_path = "ukgraph2.db"
+        db_path = "ukgraph2copy.db"
         margin = 1
     img = generate_graph_image(depart, arrive, db_path, margin)
     return send_file(img, mimetype='image/png')
+
+@app.route('/api/route/details/<string:geography>/<string:depart>/<string:arrive>', methods=["GET"])
+def get_route_details(depart, arrive, geography):
+    if geography == "dublin":
+        db_path = "dublingraph.db"
+    if geography == "uk":
+        db_path = "ukgraph2copy.db"
+    stations = get_stations_route(depart, arrive, db_path)
+    return jsonify(stations)
+
 
 @app.route('/api/stations/<string:name>', methods=['GET'])
 def get_station_by_name(name):
@@ -80,7 +90,7 @@ def get_station_by_name(name):
 def get_stations(geography):
     GEOGRAPHY_DATABASE_MAP = {
         'dublin': 'sqlite:///dublingraph.db',
-        'uk': 'sqlite:///ukgraph2.db'
+        'uk': 'sqlite:///ukgraph2copy.db'
     }
 
     db_path = GEOGRAPHY_DATABASE_MAP.get(geography.lower())
@@ -91,4 +101,4 @@ def get_stations(geography):
     return jsonify(stations)
 
 if __name__ == '__main__':
-    app.run(debug=True, port = 5004)
+    app.run(debug=True, port = 5005)

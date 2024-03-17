@@ -52,11 +52,11 @@ def load_graph_from_db(db_path):
 
 def find_route(station_name_start, station_name_end):
     fig, ax = plt.subplots(figsize=(10, 10))
-    G = load_graph_from_db("ukgraph2.db")
+    G = load_graph_from_db("ukgraph2copy.db")
     station_nodes = {data['name']: node for node, data in G.nodes(data=True) if data.get('type') == 'station'}
     start_node = station_nodes.get(station_name_start)
     end_node = station_nodes.get(station_name_end)
-    #plot_graph(G)
+    plot_graph(G)
     
     if not start_node or not end_node:
         print("One or both of the stations could not be found.")

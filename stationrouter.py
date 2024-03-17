@@ -73,7 +73,7 @@ def find_route(station_name_start, station_name_end, db_path, margin):
     for node, data in G.nodes(data=True):
         if data.get('type') == 'station':
             station_point = Point(data['pos'])
-            if path_union.distance(station_point) <= 0.005:
+            if path_union.distance(station_point) <= 0.003:
                 stations_within_distance.append(station_point)
 
     bounds = find_bounds_stations(stations_within_distance)
@@ -110,3 +110,36 @@ def find_route(station_name_start, station_name_end, db_path, margin):
     plt.axis('off')
 
     return plt
+
+def get_stations_route(depart, arrive, geo):
+    G = load_graph_from_db(geo)
+    station_nodes = {data['name']: node for node, data in G.nodes(data=True) if data.get('type') == 'station'}
+    start_node = station_nodes.get(depart)
+    end_node = station_nodes.get(arrive)
+    
+    if not start_node or not end_node:
+        print("One or both of the stations could not be found.")
+        return
+
+    shortest_path = nx.shortest_path(G, source=start_node, target=end_node, weight='weight')
+
+    line_geom = [LineString([G.nodes[u]['pos'], G.nodes[v]['pos']]) for u, v in zip(shortest_path[:-1], shortest_path[1:])]
+    gdf_path = gpd.GeoDataFrame(geometry=line_geom, crs='epsg:4326')
+    path_line = LineString([G.nodes[n]['pos'] for n in shortest_path])
+
+    stations_near_path = []
+    for node, data in G.nodes(data=True):
+        if data.get('type') == 'station':
+            station_point = Point(data['pos'])
+            if path_line.distance(station_point) <= 0.003:  
+                stations_near_path.append((data['name'], station_point))
+
+    stations_sorted = sorted(stations_near_path, key=lambda x: path_line.project(x[1]))
+
+   
+    ordered_station_names = [name for name, _ in stations_sorted]
+
+    return ordered_station_names
+
+
+

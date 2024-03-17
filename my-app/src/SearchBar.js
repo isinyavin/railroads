@@ -36,7 +36,7 @@ function SearchBar({geography, placeholder, onSelect, selectedStation}){
         setIsLoading(true);
         try {
           // Use the `geography` prop in the API URL
-          const response = await fetch(`http://127.0.0.1:5004/api/${geography}/stations`);
+          const response = await fetch(`https://railroads.onrender.com/api/${geography}/stations`);
           if (!response.ok) {
             throw new Error('Something went wrong!');
           }
