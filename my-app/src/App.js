@@ -23,6 +23,7 @@ function App() {
         setRouteDetails(detailsData); 
       } else {
         alert('Failed to fetch route details. Please try again.');
+        setIsLoading(false);
       }
   
       const routeResponse = await fetch(`https://railroads.onrender.com/api/route/${geography}/${startStation}/${destinationStation}`);
