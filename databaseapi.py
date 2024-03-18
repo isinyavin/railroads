@@ -101,4 +101,4 @@ def get_stations(geography):
     return jsonify(stations)
 
 if __name__ == '__main__':
-    app.run(debug=True, port = 5005)
+    app.run(debug=True)
