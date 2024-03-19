@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect('ukgraph2 copy.db')  
+conn = sqlite3.connect('nycsub.db')  
 cursor = conn.cursor()
 
 try:
