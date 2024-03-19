@@ -222,6 +222,7 @@ def plot_graph(G):
     plt.show()
 
 #plot_graph(G)
+#plot_graph(G)
     
 
 def calculate_distance(coords):
