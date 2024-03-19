@@ -26,7 +26,7 @@ function App() {
         setIsLoading(false);
       }
   
-      const routeResponse = await fetch(`https://railroads-production.up.railway.app//api/route/${geography}/${startStation}/${destinationStation}`);
+      const routeResponse = await fetch(`https://railroads-production.up.railway.app/api/route/${geography}/${startStation}/${destinationStation}`);
       if (routeResponse.ok) {
         const blob = await routeResponse.blob();
         const imageUrl = URL.createObjectURL(blob);
