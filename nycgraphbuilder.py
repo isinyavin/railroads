@@ -11,7 +11,7 @@ from shapely.ops import split, nearest_points
 import pickle
 import sqlite3
 
-conn = sqlite3.connect('frenchrail.db')
+conn = sqlite3.connect('italyrail.db')
 c = conn.cursor()
 
 c.execute('''CREATE TABLE IF NOT EXISTS nodes
@@ -21,8 +21,8 @@ c.execute('''CREATE TABLE IF NOT EXISTS edges
               geometry TEXT)''')  
 conn.commit()
 
-rails_gdf = gpd.read_file('frenchrails.geojson')
-stations_gdf = gpd.read_file('francestations.geojson')
+rails_gdf = gpd.read_file('italylines.geojson')
+stations_gdf = gpd.read_file('italystations.geojson')
 
 #dublin_bounds = [-6.587438, 53.098744, -6.00804, 54.511396]  
 

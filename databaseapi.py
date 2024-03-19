@@ -71,6 +71,9 @@ def get_route(depart, arrive, geography):
     if geography == "france":
         db_path = "frenchrail.db"
         margin = 1
+    if geography == "italy":
+        db_path = "italyrail.db"
+        margin = 1
     img = generate_graph_image(depart, arrive, db_path, margin)
     return send_file(img, mimetype='image/png')
 
@@ -82,6 +85,8 @@ def get_route_details(depart, arrive, geography):
         db_path = "ukgraph2copy.db"
     if geography == "france":
         db_path = "frenchrail.db"
+    if geography == "italy":
+        db_path = "italyrail.db"
     stations = get_stations_route(depart, arrive, db_path)
     return jsonify(stations)
 
@@ -99,7 +104,8 @@ def get_stations(geography):
     GEOGRAPHY_DATABASE_MAP = {
         'dublin': 'sqlite:///dublingraph.db',
         'uk': 'sqlite:///ukgraph2copy.db',
-        "france":'sqlite:///frenchrail.db'
+        "france":'sqlite:///frenchrail.db',
+        "italy":"sqlite:///italyrail.db"
     }
 
     db_path = GEOGRAPHY_DATABASE_MAP.get(geography.lower())
