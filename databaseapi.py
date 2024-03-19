@@ -80,6 +80,8 @@ def get_route_details(depart, arrive, geography):
         db_path = "dublingraph.db"
     if geography == "uk":
         db_path = "ukgraph2copy.db"
+    if geography == "france":
+        db_path = "frenchrail.db"
     stations = get_stations_route(depart, arrive, db_path)
     return jsonify(stations)
 
@@ -96,7 +98,8 @@ def get_station_by_name(name):
 def get_stations(geography):
     GEOGRAPHY_DATABASE_MAP = {
         'dublin': 'sqlite:///dublingraph.db',
-        'uk': 'sqlite:///ukgraph2copy.db'
+        'uk': 'sqlite:///ukgraph2copy.db',
+        "france":'sqlite:///frenchrail.db'
     }
 
     db_path = GEOGRAPHY_DATABASE_MAP.get(geography.lower())
