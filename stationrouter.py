@@ -39,16 +39,15 @@ def load_graph_from_db(db_path):
         node_id, x, y, type_, name = row
         G.add_node(node_id, pos=(x, y), type=type_, name=name)
 
-    c.execute('SELECT start_node_id, end_node_id, geometry FROM edges')
+    c.execute('SELECT start_node_id, end_node_id, geometry, weight FROM edges')
     for row in c.fetchall():
-        start_node_id, end_node_id, geometry = row
+        start_node_id, end_node_id, geometry, weight = row
         if geometry:
             line = loads(geometry)
-            G.add_edge(start_node_id, end_node_id, geometry = line)
+            G.add_edge(start_node_id, end_node_id, geometry = line, weight = weight)
 
     conn.close()
     return G
-
 
 def find_route(station_name_start, station_name_end, db_path, margin):
     fig, ax = plt.subplots(figsize=(10, 10))

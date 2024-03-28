@@ -13,33 +13,34 @@ function App() {
   const [routeImage, setRouteImage] = useState(null); 
   const [routeDetails, setRouteDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [failedtoRoute, setfailedtoRoute] = useState(false)
 
   const handleFindRoute = async () => {
     try {
       setIsLoading(true);
-      const detailsResponse = await fetch(`https://railroads-production.up.railway.app/api/route/details/${geography}/${startStation}/${destinationStation}`);
+      setfailedtoRoute(false);
+      const detailsResponse = await fetch(`railroads-production.up.railway.app/api/route/details/${geography}/${startStation}/${destinationStation}`);
       if (detailsResponse.ok) {
         const detailsData = await detailsResponse.json(); 
         setRouteDetails(detailsData); 
+        const routeResponse = await fetch(`railroads-production.up.railway.app/api/route/${geography}/${startStation}/${destinationStation}`);
+        if (routeResponse.ok) {
+          const blob = await routeResponse.blob();
+          const imageUrl = URL.createObjectURL(blob);
+          setRouteImage(imageUrl);
+          setIsLoading(false);
+        }
       } else {
-        alert('Failed to fetch route details. Please try again.');
         setIsLoading(false);
-      }
-  
-      const routeResponse = await fetch(`https://railroads-production.up.railway.app/api/route/${geography}/${startStation}/${destinationStation}`);
-      if (routeResponse.ok) {
-        const blob = await routeResponse.blob();
-        const imageUrl = URL.createObjectURL(blob);
-        setRouteImage(imageUrl);
-        setIsLoading(false);
-      } else {
-        alert('Failed to fetch the route image. Please try again.');
-        setIsLoading(false);
+        setfailedtoRoute(true);
+        setRouteImage(null);
+        setRouteDetails([]);
       }
     } catch (error) {
-      console.error('Error fetching route:', error);
-      alert('Error fetching the route. Please check your connection and try again.');
       setIsLoading(false);
+      setfailedtoRoute(true);
+      setRouteImage(null);
+      setRouteDetails([]);
     }
   };
   
@@ -82,6 +83,11 @@ function App() {
           )}
         </div>
         </div>
+        {failedtoRoute && (
+          <div className="error-box">
+            <p>No route exists between the two selected stations. Please try again.</p>
+            </div>
+        )}
         {isLoading && (
         <div className="loading-container">
           <p>Loading map. This may take a while...</p>

@@ -60,19 +60,19 @@ def get_stations_from_db(db_path):
 @app.route('/api/route/<string:geography>/<string:depart>/<string:arrive>', methods=["GET"])
 def get_route(depart, arrive, geography):
     if geography == "dublin":
-        db_path = "dublingraph.db"
+        db_path = "regional_network_databases/dublingraph.db"
         margin = 0.05
     if geography == "uk":
-        db_path = "ukgraph2copy.db"
+        db_path = "regional_network_databases/ukgraph2copy.db"
         margin = 1
     if geography == "nyc":
-        db_path = "nycsub.db"
+        db_path = "regional_network_databases/nycsub.db"
         margin = 0.1
     if geography == "france":
-        db_path = "frenchrail.db"
+        db_path = "regional_network_databases/frenchrail.db"
         margin = 1
     if geography == "italy":
-        db_path = "italyrail.db"
+        db_path = "regional_network_databases/italyrailcopy.db"
         margin = 1
     img = generate_graph_image(depart, arrive, db_path, margin)
     return send_file(img, mimetype='image/png')
@@ -80,13 +80,13 @@ def get_route(depart, arrive, geography):
 @app.route('/api/route/details/<string:geography>/<string:depart>/<string:arrive>', methods=["GET"])
 def get_route_details(depart, arrive, geography):
     if geography == "dublin":
-        db_path = "dublingraph.db"
+        db_path = "regional_network_databases/dublingraph.db"
     if geography == "uk":
-        db_path = "ukgraph2copy.db"
+        db_path = "regional_network_databases/ukgraph2copy.db"
     if geography == "france":
-        db_path = "frenchrail.db"
+        db_path = "regional_network_databases/frenchrail.db"
     if geography == "italy":
-        db_path = "italyrail.db"
+        db_path = "regional_network_databases/italyrailcopy.db"
     stations = get_stations_route(depart, arrive, db_path)
     return jsonify(stations)
 
@@ -102,10 +102,10 @@ def get_station_by_name(name):
 @app.route('/api/<string:geography>/stations', methods=['GET'])
 def get_stations(geography):
     GEOGRAPHY_DATABASE_MAP = {
-        'dublin': 'sqlite:///dublingraph.db',
-        'uk': 'sqlite:///ukgraph2copy.db',
-        "france":'sqlite:///frenchrail.db',
-        "italy":"sqlite:///italyrail.db"
+        'dublin': 'sqlite:///regional_network_databases/dublingraph.db',
+        'uk': 'sqlite:///regional_network_databases/ukgraph2copy.db',
+        "france":'sqlite:///regional_network_databases/frenchrail.db',
+        "italy":"sqlite:///regional_network_databases/italyrail.db"
     }
 
     db_path = GEOGRAPHY_DATABASE_MAP.get(geography.lower())

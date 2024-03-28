@@ -43,10 +43,30 @@
   padding-left: 20px; 
   height: 700px; 
   width: 40%; 
-  margin-top: 20px;
+  margin-top: 5px;
   margin-bottom: 20px; 
   max-height: 600px; 
   overflow: auto;
+}
+
+.error-box p {
+  padding-left: 40px;
+  margin-bottom: 10px;
+  color: #ffffff; 
+  font-size: 16px;
+}
+
+.error-box {
+  width: 30%; 
+  height: 60px; 
+  margin-left: 20px;
+  padding-top: 1px;
+  padding-bottom: 10px;
+  background-color: #9a303b;
+  color: white;
+  border: black;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .Selectors-wrapper {
@@ -63,6 +83,8 @@
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   color: #333;
+  max-height: 290px;
+  overflow: auto;
 }
 
 .RouteDetails h2 {

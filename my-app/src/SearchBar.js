@@ -35,7 +35,7 @@ function SearchBar({geography, placeholder, onSelect, selectedStation}){
       const fetchStations = async () => {
         setIsLoading(true);
         try {
-          const response = await fetch(`https://railroads-production.up.railway.app/api/${geography}/stations`);
+          const response = await fetch(`railroads-production.up.railway.app/api/${geography}/stations`);
           if (!response.ok) {
             throw new Error('Something went wrong!');
           }
