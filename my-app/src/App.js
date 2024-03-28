@@ -19,11 +19,11 @@ function App() {
     try {
       setIsLoading(true);
       setfailedtoRoute(false);
-      const detailsResponse = await fetch(`railroads-production.up.railway.app/api/route/details/${geography}/${startStation}/${destinationStation}`);
+      const detailsResponse = await fetch(`https://railroads-production.up.railway.app/api/route/details/${geography}/${startStation}/${destinationStation}`);
       if (detailsResponse.ok) {
         const detailsData = await detailsResponse.json(); 
         setRouteDetails(detailsData); 
-        const routeResponse = await fetch(`railroads-production.up.railway.app/api/route/${geography}/${startStation}/${destinationStation}`);
+        const routeResponse = await fetch(`https://railroads-production.up.railway.app/api/route/${geography}/${startStation}/${destinationStation}`);
         if (routeResponse.ok) {
           const blob = await routeResponse.blob();
           const imageUrl = URL.createObjectURL(blob);
