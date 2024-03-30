@@ -5,7 +5,6 @@ from flask_cors import CORS
 import matplotlib.pyplot as plt
 import networkx as nx
 from io import BytesIO
-import pickle
 from shapely.geometry import Point, LineString
 import contextily as ctx
 import sqlite3
@@ -39,9 +38,10 @@ def load_graph_from_db(db_path):
         node_id, x, y, type_, name = row
         G.add_node(node_id, pos=(x, y), type=type_, name=name)
 
+    #you can add weight back in later
     c.execute('SELECT start_node_id, end_node_id, geometry, weight FROM edges')
     for row in c.fetchall():
-        start_node_id, end_node_id, geometry, weight = row
+        start_node_id, end_node_id, geometry, weight= row
         if geometry:
             line = loads(geometry)
             G.add_edge(start_node_id, end_node_id, geometry = line, weight = weight)
@@ -50,7 +50,7 @@ def load_graph_from_db(db_path):
     return G
 
 def find_route(station_name_start, station_name_end, db_path, margin):
-    fig, ax = plt.subplots(figsize=(10, 10))
+    fig, ax = plt.subplots(figsize=(25, 10))
     G = load_graph_from_db(db_path)
     station_nodes = {data['name']: node for node, data in G.nodes(data=True) if data.get('type') == 'station'}
     start_node = station_nodes.get(station_name_start)

@@ -7,7 +7,11 @@ function SearchBar({geography, placeholder, onSelect, selectedStation}){
     const [error, setError] = useState(null);
     const [filteredData, setFilteredData] = useState([]);
     const [wordEntered, setWordEntered] = useState("");
-    
+
+    useEffect(() => {
+      setWordEntered(selectedStation || "");
+    }, [selectedStation]);
+
     const handleSelectStation = (name) => {
         setWordEntered(name)
         setFilteredData([])

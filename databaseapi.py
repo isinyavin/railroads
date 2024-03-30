@@ -69,7 +69,7 @@ def get_route(depart, arrive, geography):
         db_path = "regional_network_databases/nycsub.db"
         margin = 0.1
     if geography == "france":
-        db_path = "regional_network_databases/frenchrail.db"
+        db_path = "regional_network_databases/frenchrailcopy.db"
         margin = 1
     if geography == "italy":
         db_path = "regional_network_databases/italyrailcopy.db"
@@ -84,9 +84,11 @@ def get_route_details(depart, arrive, geography):
     if geography == "uk":
         db_path = "regional_network_databases/ukgraph2copy.db"
     if geography == "france":
-        db_path = "regional_network_databases/frenchrail.db"
+        db_path = "regional_network_databases/frenchrailcopy.db"
     if geography == "italy":
         db_path = "regional_network_databases/italyrailcopy.db"
+    if geography == "nyc":
+        db_path = "regional_network_databases/nycsub.db"
     stations = get_stations_route(depart, arrive, db_path)
     return jsonify(stations)
 
@@ -104,8 +106,9 @@ def get_stations(geography):
     GEOGRAPHY_DATABASE_MAP = {
         'dublin': 'sqlite:///regional_network_databases/dublingraph.db',
         'uk': 'sqlite:///regional_network_databases/ukgraph2copy.db',
-        "france":'sqlite:///regional_network_databases/frenchrail.db',
-        "italy":"sqlite:///regional_network_databases/italyrail.db"
+        "france":'sqlite:///regional_network_databases/frenchrailcopy.db',
+        "italy":"sqlite:///regional_network_databases/italyrailcopy.db",
+        "nyc":"sqlite:///regional_network_databases/nycsub.db"
     }
 
     db_path = GEOGRAPHY_DATABASE_MAP.get(geography.lower())
@@ -116,4 +119,4 @@ def get_stations(geography):
     return jsonify(stations)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port = 5002)

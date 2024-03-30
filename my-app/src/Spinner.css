@@ -3,7 +3,7 @@
     justify-content: left;
     align-items: left;
     height: 100px; 
-    padding-left: 40px;
+    padding-left: 10px;
   }
   
   .loading-spinner {
@@ -36,7 +36,7 @@
   }
   
   .loading-container p {
-    padding-left: 40px;
+    padding-left: 10px;
     margin-bottom: 10px;
     color: #333; 
     font-size: 16px;
