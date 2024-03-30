@@ -27,11 +27,11 @@ function App() {
       setIsLoading(true);
       setfailedtoRoute(false);
       setInitiatedSearch(true);
-      const detailsResponse = await fetch(`https://railroads-production.up.railway.app//api/route/details/${geography}/${startStation}/${destinationStation}`);
+      const detailsResponse = await fetch(`https://railroads-production.up.railway.app/api/route/details/${geography}/${startStation}/${destinationStation}`);
       if (detailsResponse.ok) {
         const detailsData = await detailsResponse.json(); 
         setRouteDetails(detailsData); 
-        const routeResponse = await fetch(`https://railroads-production.up.railway.app//api/route/${geography}/${startStation}/${destinationStation}`);
+        const routeResponse = await fetch(`https://railroads-production.up.railway.app/api/route/${geography}/${startStation}/${destinationStation}`);
         if (routeResponse.ok) {
           const blob = await routeResponse.blob();
           const imageUrl = URL.createObjectURL(blob);
@@ -59,7 +59,7 @@ function App() {
       return;
     }
     try {
-      const response = await fetch(`https://railroads-production.up.railway.app//api/${geography}/stations`);
+      const response = await fetch(`https://railroads-production.up.railway.app/api/${geography}/stations`);
       if (!response.ok) {
         throw new Error('Failed to fetch stations');
       }
