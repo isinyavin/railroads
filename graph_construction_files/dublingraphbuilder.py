@@ -351,8 +351,6 @@ find_and_plot_path(G, 'Balbriggan', 'Sandycove and Glasthule',ax)
 
 
 
-
-
 def find_shortest_path(G, station_name_start, station_name_end):
     station_nodes = {data['name']: node for node, data in G.nodes(data=True) if data.get('type') == 'station'}
     start_node = station_nodes.get(station_name_start)

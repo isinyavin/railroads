@@ -1,0 +1,12 @@
+
+.map-container {
+    height: 500px; 
+    width: 1000px;
+    z-index: 0;
+  }
+  
+  .leaflet-container {
+    height: 500px;
+    width: 1050px;
+  }
+  

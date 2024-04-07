@@ -49,10 +49,9 @@ def load_graph_from_db(db_path):
     conn.close()
     return G
 
-
 def find_route(station_name_start, station_name_end):
     fig, ax = plt.subplots(figsize=(10, 10))
-    G = load_graph_from_db("regional_network_databases/italyrailcopy.db")
+    G = load_graph_from_db("nyclines_efficient.db")
     station_nodes = {data['name']: node for node, data in G.nodes(data=True) if data.get('type') == 'station'}
     start_node = station_nodes.get(station_name_start)
     end_node = station_nodes.get(station_name_end)
@@ -62,15 +61,12 @@ def find_route(station_name_start, station_name_end):
         print("One or both of the stations could not be found.")
         return
 
-
     shortest_path = nx.shortest_path(G, source=start_node, target=end_node, weight='weight')
-
 
     line_geom = [LineString([G.nodes[u]['pos'], G.nodes[v]['pos']]) for u, v in zip(shortest_path[:-1], shortest_path[1:])]
     gdf_path = gpd.GeoDataFrame(geometry=line_geom, crs='epsg:4326')
 
     path_union = gdf_path.unary_union
-
 
     stations_within_distance = []
     for node, data in G.nodes(data=True):
@@ -113,7 +109,6 @@ def find_route(station_name_start, station_name_end):
     ctx.add_basemap(ax, crs=gdf_path.crs.to_string(), source=ctx.providers.Esri.WorldStreetMap)
     plt.axis('off')
 
-    #return plt
     plt.show()
 
 def plot_graph(G):
@@ -144,4 +139,5 @@ def plot_graph(G):
     plt.show()
 
 
-find_route('Genova Voltri', 'Firenze Rifredi')
+G = load_graph_from_db("ukgraph_updated copy.db")
+plot_graph(G)

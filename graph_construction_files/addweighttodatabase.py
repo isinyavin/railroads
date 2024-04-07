@@ -1,7 +1,7 @@
 import sqlite3
 import geopy.distance
 
-conn = sqlite3.connect('regional_network_databases/frenchrailcopy.db')
+conn = sqlite3.connect('regional_network_databases/italyrailcopy.db')
 cursor = conn.cursor()
 
 cursor.execute("SELECT edge_id, geometry FROM edges")

@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect('italyrail.db')  
+conn = sqlite3.connect('ukgraph_updated.db')  
 cursor = conn.cursor()
 
 try:

@@ -5,6 +5,7 @@ import Map from './Map';
 import './App.css';
 import SearchBar from "./SearchBar"
 import Spinner from './Spinner';
+import TrainRouteMap from './TrainRouteMap';
 
 function App() {
   const [startStation, setStartStation] = useState('');
@@ -16,20 +17,40 @@ function App() {
   const [failedtoRoute, setfailedtoRoute] = useState(false)
   const [displayMap, setDisplayMap] = useState(false);
   const [initiatedsearch, setInitiatedSearch] = useState(false);
+  const [isDynamicMap, setIsDynamicMap] = useState(true);
+  const [startRouting, setStartRouting] = useState(false);
+  const [routeCoordinates, setRouteCoordinates] = useState([]);
+  const [stationsData, setStationsData] = useState("");
+  const [intermedStations, setIntermedStations] = useState(false);
+
 
   const toggleDisplay = () => {
     setDisplayMap(!displayMap); 
   };
 
+  const handleMapTypeToggle = () => {
+    setIsDynamicMap(!isDynamicMap);
+  };
+
   const handleFindRoute = async () => {
     try {
+      setStartRouting(true);
       setDisplayMap(true);
       setIsLoading(true);
       setfailedtoRoute(false);
       setInitiatedSearch(true);
+      const coordsResponse = await fetch(`https://railroads-production.up.railway.app/api/route/coords/${geography}/${startStation}/${destinationStation}`);
+      if (coordsResponse.ok) {
+        const coordsData = await coordsResponse.json();
+        setRouteCoordinates(coordsData[0]);
+        setStationsData(coordsData[1]);
+      } else {
+        throw new Error('Failed to fetch route coordinates');
+      }
       const detailsResponse = await fetch(`https://railroads-production.up.railway.app/api/route/details/${geography}/${startStation}/${destinationStation}`);
       if (detailsResponse.ok) {
         const detailsData = await detailsResponse.json(); 
+        setIsLoading(false);
         setRouteDetails(detailsData); 
         const routeResponse = await fetch(`https://railroads-production.up.railway.app/api/route/${geography}/${startStation}/${destinationStation}`);
         if (routeResponse.ok) {
@@ -87,6 +108,7 @@ function App() {
         RailRouter
       </header>
       <div className="ContentwMap">
+
         <div className="Content">
           <div className="Selectors-wrapper">
             <div className="Selectors">
@@ -98,7 +120,15 @@ function App() {
               <SearchBar geography={geography} placeholder={"Enter Departure Station"} onSelect={setStartStation} selectedStation={startStation}/>
               <SearchBar geography={geography} placeholder="Enter Destination Station" onSelect={setDestinationStation} selectedStation={destinationStation} />
               <button className="random-station-generator" onClick={generateRandomStations}>Generate Random Stations</button>
-
+              <div className="stationContainer">
+                <div className="textstations">
+                <p>Show Stations on Route</p>
+                </div>
+                <button className={`toggle-btn ${intermedStations ? "toggled" : ""}`} onClick={()=>setIntermedStations(!intermedStations)}>
+                <div className="thumb"></div>
+              </button>
+              </div>
+            
             </div>
             <button className="find-route-button" onClick={handleFindRoute}>Find Route</button>
             {failedtoRoute && (
@@ -113,8 +143,8 @@ function App() {
                 </div>
               )}
           </div>
-          <div className="Output-Components">
 
+          <div className="Output-Components">
             {!isLoading && initiatedsearch && !failedtoRoute && ( 
               <div className = "toggle-bar">
               <div className={`slider ${displayMap === true ? 'left' : 'right'}`}></div>
@@ -128,12 +158,15 @@ function App() {
               </button>
               </div>
               )}
-          {displayMap && (
+          {displayMap && !isDynamicMap && (
             <div className="MapContainer">
               {!isLoading && <Map routeImage={routeImage} />}
             </div>
           ) }
-          
+          {displayMap && isDynamicMap && (
+            <TrainRouteMap geo={geography} depart={startStation} dest={destinationStation} startRouting={startRouting} coordinates={routeCoordinates} stations={stationsData} appearstations={intermedStations}/>
+          )}
+
             {!displayMap && initiatedsearch && !isLoading && (
               <div className="RouteDetails">
               <h2>Route Details</h2>
@@ -151,9 +184,6 @@ function App() {
             </div>
             )
           }
-
-
-    
           </div>
         </div>
       </div>

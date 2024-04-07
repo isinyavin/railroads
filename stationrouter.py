@@ -50,7 +50,7 @@ def load_graph_from_db(db_path):
     return G
 
 def find_route(station_name_start, station_name_end, db_path, margin):
-    fig, ax = plt.subplots(figsize=(25, 10))
+    fig, ax = plt.subplots(figsize=(15, 10))
     G = load_graph_from_db(db_path)
     station_nodes = {data['name']: node for node, data in G.nodes(data=True) if data.get('type') == 'station'}
     start_node = station_nodes.get(station_name_start)
@@ -140,5 +140,29 @@ def get_stations_route(depart, arrive, geo):
 
     return ordered_station_names
 
+def find_route_coords(station_name_start, station_name_end, database):
+    G = load_graph_from_db(database)
+    station_nodes = {data['name']: node for node, data in G.nodes(data=True) if data.get('type') == 'station'}
+    start_node = station_nodes.get(station_name_start)
+    end_node = station_nodes.get(station_name_end)
 
+    if not start_node or not end_node:
+        return None, "One or both of the stations could not be found."
+
+    shortest_path = nx.shortest_path(G, source=start_node, target=end_node, weight='weight')
+    path_coords = [(G.nodes[node]['pos'][0], G.nodes[node]['pos'][1]) for node in shortest_path]
+    path_line = LineString(path_coords)
+
+    nearby_stations = []
+    for node, data in G.nodes(data=True):
+        if data.get('type') == 'station':
+            station_point = Point(data['pos'])
+            if path_line.distance(station_point) <= 0.003: 
+                nearby_stations.append({'name': data['name'], 'coordinates': data['pos']})
+
+    nearby_stations_sorted = sorted(nearby_stations, key=lambda station: path_line.project(Point(station['coordinates'])))
+
+    coord_string = [f"{coord[0]}, {coord[1]}" for coord in path_coords]
+
+    return coord_string, nearby_stations_sorted
 

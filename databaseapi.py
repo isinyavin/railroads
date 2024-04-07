@@ -11,7 +11,7 @@ from io import BytesIO
 import pickle
 from shapely.geometry import Point, LineString
 import contextily as ctx
-from stationrouter import find_route, get_stations_route
+from stationrouter import find_route, get_stations_route, find_route_coords
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dublingraph.db'
@@ -51,7 +51,7 @@ def get_stations_from_db(db_path):
     engine = create_engine(db_path)
     print(db_path)
     with engine.connect() as connection:
-        query = text("SELECT name FROM nodes WHERE type = 'station' AND name IS NOT NULL")
+        query = text("SELECT name, admin1, admin2, country FROM nodes WHERE type = 'station' AND name IS NOT NULL")
         result = connection.execute(query)
         stations = [row._asdict() for row in result]
     return stations
@@ -63,7 +63,7 @@ def get_route(depart, arrive, geography):
         db_path = "regional_network_databases/dublingraph.db"
         margin = 0.05
     if geography == "uk":
-        db_path = "regional_network_databases/ukgraph2copy.db"
+        db_path = "regional_network_databases/ukgraph_updated.db"
         margin = 1
     if geography == "nyc":
         db_path = "regional_network_databases/nycsub.db"
@@ -82,7 +82,7 @@ def get_route_details(depart, arrive, geography):
     if geography == "dublin":
         db_path = "regional_network_databases/dublingraph.db"
     if geography == "uk":
-        db_path = "regional_network_databases/ukgraph2copy.db"
+        db_path = "regional_network_databases/ukgraph_updated.db"
     if geography == "france":
         db_path = "regional_network_databases/frenchrailcopy.db"
     if geography == "italy":
@@ -105,7 +105,7 @@ def get_station_by_name(name):
 def get_stations(geography):
     GEOGRAPHY_DATABASE_MAP = {
         'dublin': 'sqlite:///regional_network_databases/dublingraph.db',
-        'uk': 'sqlite:///regional_network_databases/ukgraph2copy.db',
+        'uk': 'sqlite:///regional_network_databases/ukgraph_updated.db',
         "france":'sqlite:///regional_network_databases/frenchrailcopy.db',
         "italy":"sqlite:///regional_network_databases/italyrailcopy.db",
         "nyc":"sqlite:///regional_network_databases/nycsub.db"
@@ -118,5 +118,23 @@ def get_stations(geography):
     stations = get_stations_from_db(db_path)
     return jsonify(stations)
 
+@app.route('/api/route/coords/<string:geography>/<string:depart>/<string:arrive>', methods=['GET'])
+def get_route_coords(geography, depart, arrive):
+    if geography == "dublin":
+        db_path = "regional_network_databases/dublingraph.db"
+    if geography == "uk":
+        db_path = "regional_network_databases/ukgraph_updated.db"
+    if geography == "france":
+        db_path = "regional_network_databases/frenchrailcopy.db"
+    if geography == "italy":
+        db_path = "regional_network_databases/italyrailcopy.db"
+    if geography == "nyc":
+        db_path = "regional_network_databases/nycsub.db"
+    if db_path is None:
+        return jsonify({"error": f"No database found for geography: {geography}"}), 404
+
+    route = find_route_coords(depart, arrive, db_path)
+    return jsonify(route)
+
 if __name__ == '__main__':
-    app.run(debug=True, port = 5002)
+    app.run(debug=True, port = 5006)
