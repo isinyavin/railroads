@@ -1,7 +1,7 @@
 import sqlite3
 import reverse_geocoder as rg
 
-conn = sqlite3.connect('belgium_graph.db')
+conn = sqlite3.connect('ukraine_graph.db')
 cursor = conn.cursor()
 
 cursor.execute("SELECT node_id, x, y FROM nodes WHERE type='station'")

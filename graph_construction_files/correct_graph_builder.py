@@ -14,7 +14,7 @@ from shapely.ops import unary_union, split
 from shapely.strtree import STRtree
 from rtree import index
 
-conn = sqlite3.connect('belgium_graph.db')
+conn = sqlite3.connect('ukraine_graph.db')
 c = conn.cursor()
 
 c.execute('''CREATE TABLE IF NOT EXISTS nodes
@@ -24,8 +24,8 @@ c.execute('''CREATE TABLE IF NOT EXISTS edges
               geometry TEXT)''')  
 conn.commit()
 
-rails_gdf = gpd.read_file('geojson files/belgium_railways.geojson')
-stations_gdf = gpd.read_file('geojson files/belgium_stations.geojson')
+rails_gdf = gpd.read_file('geojson files/ukraine_lines.geojson')
+stations_gdf = gpd.read_file('geojson files/ukraine_stations.geojson')
 
 #dublin_bounds = [-6.587438, 53.098744, -6.00804, 54.511396]  
 
@@ -153,6 +153,9 @@ for idx, railway in rails_gdf.iterrows():
         i += 1
 """
 
+
+
+
 for idx, railway in rails_gdf.iterrows():
     if isinstance(railway.geometry, LineString):
         start_point, end_point = railway.geometry.coords[0], railway.geometry.coords[-1]
@@ -259,12 +262,99 @@ def add_station_to_graph(station, graph, railways_gdf):
         #graph.remove_edge(u,v)
         #if graph.has_edge(u,v):
             #return exit(1)
+        
 
+def add_station_to_graph2(station, graph, railways_gdf, railways_gdf_sindex):
+    station_point = Point(station.geometry.x, station.geometry.y)
+    buffer_distance = 0.01 
+    buffered_point = station_point.buffer(buffer_distance)
+
+    possible_matches_index = list(railways_gdf_sindex.intersection(buffered_point.bounds))
+    possible_matches = railways_gdf.iloc[possible_matches_index]
+
+    nearest_edges = []
+    for _, edge in possible_matches.iterrows():
+        edge_geom = edge.geometry
+        _, nearest_point_on_edge = nearest_points(station_point, edge_geom)
+        distance = station_point.distance(nearest_point_on_edge)
+        nearest_edges.append({
+            'edge': edge,
+            'distance': distance,
+            'nearest_point_on_edge': nearest_point_on_edge,
+            'start_coord': edge_geom.coords[0],
+            'end_coord': edge_geom.coords[-1]
+    })
+    
+    station_point = Point(station.geometry.x, station.geometry.y)
+
+    nearest_edges.sort(key=lambda x: x['distance'])
+    nearest_edges = nearest_edges[:2]
+
+    station_node_id = f"{station_point.x}_{station_point.y}"
+    station_attributes = {
+        'name': station['name'],
+    }
+    if 'station' in station and station['station'] == 'subway':
+        station_attributes['subway'] = True
+
+    graph.add_node(station_node_id, pos=(station_point.x, station_point.y), type = "station", **station_attributes)
+
+    for edge in nearest_edges:
+        connector_id = f"{edge['nearest_point_on_edge'].x}_{edge['nearest_point_on_edge'].y}"
+        if connector_id == station_node_id:
+            continue
+
+        if distance > 0.01:
+            continue
+        graph.add_node(connector_id, pos=(edge['nearest_point_on_edge'].x, edge['nearest_point_on_edge'].y))
+
+        u_pos = edge['start_coord']
+        v_pos = edge['end_coord']
+        edge_to_u_geometry = LineString([station_point, edge['nearest_point_on_edge']])
+
+        line = edge_geom
+        point =  edge['nearest_point_on_edge']
+
+        nearest_point_on_line, nearest_point2 = nearest_points(line, point)
+
+        closest_coordinate = min(line.coords, key=lambda coord: Point(coord).distance(nearest_point_on_line))
+        closest_point_geometry = Point(closest_coordinate)
+
+        split_geom = split(line, closest_point_geometry)
+
+        i = 0 
+        if len(split_geom.geoms) == 2:
+            geom_to_u = split_geom.geoms[0]
+            geom_to_v = split_geom.geoms[1]
+            #print("Split successful")
+            x,y = edge['nearest_point_on_edge'].x, edge['nearest_point_on_edge'].y
+            geom_to_u = LineString(list(geom_to_u.coords) + [(x,y)])
+            geom_to_v = LineString([(x,y)]+ list(geom_to_v.coords)[1:])
+            #print(geom_to_u)
+            #print(geom_to_v)
+        else:
+            i+=1
+            u_pos = edge['start_coord']
+            v_pos = edge['end_coord']
+            geom_to_u = LineString([u_pos, edge['nearest_point_on_edge']])
+            geom_to_v = LineString([edge['nearest_point_on_edge'], v_pos])
+        
+        u = f"{edge['start_coord'][0]}_{edge['start_coord'][1]}"
+        v = f"{edge['end_coord'][0]}_{edge['end_coord'][1]}"
+        graph.add_edge(connector_id, station_node_id, geometry=edge_to_u_geometry)
+        graph.add_edge(u, connector_id, geometry = geom_to_u)
+        graph.add_edge(connector_id, v, geometry = geom_to_v)
+
+        #graph.remove_edge(u,v)
+        #if graph.has_edge(u,v):
+            #return exit(1)
+
+railways_gdf_sindex = rails_gdf.sindex
 i =0 
 for idx, station in stations_gdf.iterrows():
     i += 1 
     print(f"Station: {station['name']} Count: {i/3621*100}")
-    add_station_to_graph(station, G, rails_gdf)
+    add_station_to_graph2(station, G, rails_gdf, railways_gdf_sindex)
 
 pos = nx.get_node_attributes(G, 'pos')
 

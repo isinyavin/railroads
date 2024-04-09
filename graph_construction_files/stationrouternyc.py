@@ -139,5 +139,5 @@ def plot_graph(G):
     plt.show()
 
 
-G = load_graph_from_db("ukgraph_updated copy.db")
+G = load_graph_from_db("belgium_graph2.db")
 plot_graph(G)

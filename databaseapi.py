@@ -77,6 +77,9 @@ def get_route(depart, arrive, geography):
     if geography == "belgium":
         db_path = "regional_network_databases/belgium_graph.db"
         margin = 1
+    if geography == "ukraine":
+        db_path = "regional_network_databases/ukraine_graph.db"
+        margin =1 
     img = generate_graph_image(depart, arrive, db_path, margin)
     return send_file(img, mimetype='image/png')
 
@@ -94,6 +97,8 @@ def get_route_details(depart, arrive, geography):
         db_path = "regional_network_databases/nycsub.db"
     if geography == "belgium":
         db_path = "regional_network_databases/belgium_graph.db"
+    if geography == "ukraine":
+        db_path = "regional_network_databases/ukraine_graph.db"
     stations = get_stations_route(depart, arrive, db_path)
     return jsonify(stations)
 
@@ -115,6 +120,7 @@ def get_stations(geography):
         "italy":"sqlite:///regional_network_databases/italyrailcopy.db",
         "nyc":"sqlite:///regional_network_databases/nycsub.db",
         "belgium":"sqlite:///regional_network_databases/belgium_graph.db",
+        "ukraine":"sqlite:///regional_network_databases/ukraine_graph.db"
     }
 
     db_path = GEOGRAPHY_DATABASE_MAP.get(geography.lower())
@@ -138,6 +144,8 @@ def get_route_coords(geography, depart, arrive):
         db_path = "regional_network_databases/nycsub.db"
     if geography == "belgium":
         db_path = "regional_network_databases/belgium_graph.db"
+    if geography == "ukraine":
+        db_path = "regional_network_databases/ukraine_graph.db"
     if db_path is None:
         return jsonify({"error": f"No database found for geography: {geography}"}), 404
 
