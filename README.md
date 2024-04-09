@@ -1,5 +1,7 @@
 # RailRouter
 
+![pic of site](https://github.com/isinyavin/railroads/blob/main/picofwebsite.png)
+
 ## Description
 
 RailRouter computes and visualizes the shortest railway route between train stations across various regions. 
