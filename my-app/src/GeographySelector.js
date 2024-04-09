@@ -11,6 +11,7 @@ function GeographySelector({ label, setSelectedGeography, selectedGeography }) {
       <select id="geography-select" value={selectedGeography} onChange={handleGeographyChange}>
         <option value="">Please Select a Geography</option>
         <option value="uk">United Kingdom</option>
+        <option value="belgium">Belgium</option>
         <option value="france">France</option>
         <option value="italy">Italy</option>
       </select>

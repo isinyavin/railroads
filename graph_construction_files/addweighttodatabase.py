@@ -1,7 +1,7 @@
 import sqlite3
 import geopy.distance
 
-conn = sqlite3.connect('regional_network_databases/italyrailcopy.db')
+conn = sqlite3.connect('belgium_graph.db')
 cursor = conn.cursor()
 
 cursor.execute("SELECT edge_id, geometry FROM edges")
@@ -14,7 +14,7 @@ def calculate_distance(wkt_linestring):
     return geopy.distance.geodesic(point1, point2).meters
 
 
-#cursor.execute("ALTER TABLE edges ADD COLUMN weight REAL")
+cursor.execute("ALTER TABLE edges ADD COLUMN weight REAL")
 
 for edge in edges:
     edge_id, geometry = edge

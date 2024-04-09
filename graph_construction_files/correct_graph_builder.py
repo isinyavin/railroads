@@ -14,7 +14,7 @@ from shapely.ops import unary_union, split
 from shapely.strtree import STRtree
 from rtree import index
 
-conn = sqlite3.connect('nycgraphupdated.db')
+conn = sqlite3.connect('belgium_graph.db')
 c = conn.cursor()
 
 c.execute('''CREATE TABLE IF NOT EXISTS nodes
@@ -24,8 +24,8 @@ c.execute('''CREATE TABLE IF NOT EXISTS edges
               geometry TEXT)''')  
 conn.commit()
 
-rails_gdf = gpd.read_file('geojson files/linesnyc.geojson')
-stations_gdf = gpd.read_file('geojson files/stationsnyc.geojson')
+rails_gdf = gpd.read_file('geojson files/belgium_railways.geojson')
+stations_gdf = gpd.read_file('geojson files/belgium_stations.geojson')
 
 #dublin_bounds = [-6.587438, 53.098744, -6.00804, 54.511396]  
 
@@ -130,7 +130,7 @@ def add_and_split_railways(graph, railway, edge_attributes):
 
         if not graph.has_edge(start_node_id, end_node_id):
             graph.add_edge(start_node_id, end_node_id, geometry=split_geom, **edge_attributes)
-
+"""
 i = 1
 for idx, railway in rails_gdf.iterrows():
     print(f"Processed {i} edges")
@@ -151,8 +151,8 @@ for idx, railway in rails_gdf.iterrows():
         }
         add_and_split_railways3(G, railway, edge_attributes)
         i += 1
-
 """
+
 for idx, railway in rails_gdf.iterrows():
     if isinstance(railway.geometry, LineString):
         start_point, end_point = railway.geometry.coords[0], railway.geometry.coords[-1]
@@ -186,7 +186,7 @@ for idx, railway in rails_gdf.iterrows():
         if G.has_edge(start_node, end_node) == False:
             G.add_edge(start_node_id, end_node_id, geometry=railway.geometry, **edge_attributes)
 distances = []
-"""
+
 
 def add_station_to_graph(station, graph, railways_gdf):
     
@@ -196,16 +196,10 @@ def add_station_to_graph(station, graph, railways_gdf):
 
     for u, v, data in graph.edges(data=True):
         if 'geometry' in data:
-            u_point = Point(graph.nodes[u]['pos'])
-            v_point = Point(graph.nodes[v]['pos'])
-            u_distance = station_point.distance(u_point)
-            v_distance = station_point.distance(v_point)
-
-            if min(u_distance, v_distance) <= 100000:
-                edge_geom = data['geometry']
-                nearest_point = nearest_points(station_point, edge_geom)[1]
-                distance = station_point.distance(nearest_point)
-                edge_distances.append((distance, (u, v), nearest_point, edge_geom))
+            edge_geom = data['geometry']
+            nearest_point = nearest_points(station_point, edge_geom)[1]
+            distance = station_point.distance(nearest_point)
+            edge_distances.append((distance, (u, v), nearest_point, edge_geom))
 
     edge_distances.sort(key=lambda x: x[0])
     nearest_edges = edge_distances[:2]
@@ -213,6 +207,9 @@ def add_station_to_graph(station, graph, railways_gdf):
     station_attributes = {
         'name': station['name'],
     }
+    if 'station' in station and station['station'] == 'subway':
+        station_attributes['subway'] = True
+
     graph.add_node(station_node_id, pos=(station_point.x, station_point.y), type = "station", **station_attributes)
 
     for dist, (u, v), nearest_point, edge_geom in nearest_edges:
@@ -220,7 +217,7 @@ def add_station_to_graph(station, graph, railways_gdf):
         if connector_id == station_node_id:
             continue
 
-        if dist > 0.004:
+        if dist > 0.01:
             continue
         graph.add_node(connector_id, pos=(nearest_point.x, nearest_point.y))
 
@@ -270,6 +267,8 @@ for idx, station in stations_gdf.iterrows():
     add_station_to_graph(station, G, rails_gdf)
 
 pos = nx.get_node_attributes(G, 'pos')
+
+
 
 
 

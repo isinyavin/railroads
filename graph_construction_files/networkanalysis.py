@@ -24,7 +24,7 @@ def load_graph_from_db(db_path):
     conn.close()
     return G
 
-G = load_graph_from_db("regional_network_databases/ukgraph2copy.db")
+G = load_graph_from_db("belgium_graph.db")
 components = list(nx.connected_components(G))
 
 station_counts_per_component = []
