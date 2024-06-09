@@ -14,7 +14,6 @@ function GeographySelector({ label, setSelectedGeography, selectedGeography }) {
         <option value="belgium">Belgium</option>
         <option value="france">France</option>
         <option value="italy">Italy</option>
-        <option value="ukraine">Ukraine</option>
       </select>
     </div>
   );

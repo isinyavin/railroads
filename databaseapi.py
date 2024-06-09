@@ -135,7 +135,7 @@ def get_route_coords(geography, depart, arrive):
     if geography == "dublin":
         db_path = "regional_network_databases/dublingraph.db"
     if geography == "uk":
-        db_path = "regional_network_databases/ukgraph2copy_test.db"
+        db_path = "regional_network_databases/ukgraph2copy.db"
     if geography == "france":
         db_path = "regional_network_databases/frenchrailcopy.db"
     if geography == "italy":
