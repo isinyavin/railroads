@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './TrainRouteMap.css';
-import markerIcon from '/Users/ivansinyavin/Desktop/UKRailroad/my-app/src/3448683-1.png';
+import markerIcon from './assets/3448683-1.png';
+
 
 const TrainRouteMap = ({ geo, depart, dest, startRouting, coordinates, stations, appearstations}) => {
   useEffect(() => {
