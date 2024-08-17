@@ -4,7 +4,7 @@
 
 ## Description
 
-RailRouter computes and visualizes the shortest railway route between train stations across various regions. 
+RailRouter computes and visualizes the shortest railway route between train stations across various regions (Currently available regions: UK, France, Italy, and Belgium)
 
 ## Directory Structure
 * /my-app/src/: Contains the React application source code.
